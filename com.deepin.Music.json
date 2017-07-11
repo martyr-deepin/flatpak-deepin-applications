@@ -1,0 +1,64 @@
+{
+    "app-id": "com.deepin.Music",
+    "runtime": "com.deepin.Runtime",
+    "runtime-version": "1",
+    "sdk": "com.deepin.Sdk",
+    "command": "deepin-music",
+    "separate-locales": false,
+    "tags": ["proprietary"],
+    "finish-args": [
+        /* X11 + XShm access */
+        "--share=ipc", "--socket=x11",
+        /* Sound access */
+        "--socket=pulseaudio",
+        /* Network access */
+        "--share=network",
+        /* OpenGL */
+        "--device=dri",
+	"--own-name=org.mpris.MediaPlayer2.deepinmusic"
+    ],
+    "modules": [
+	"org.ffmpeg.FFmpeg.json",
+	{
+	    "name": "taglib",
+	    "cmake": true,
+	    "config-opts": ["-DCMAKE_INSTALL_PREFIX=/app", "-DBUILD_SHARED_LIBS=ON"],
+	    "sources": [
+		    {
+			    "type": "archive",
+			    "url": "http://taglib.github.io/releases/taglib-1.11.1.tar.gz",
+			    "sha256": "b6d1a5a610aae6ff39d93de5efd0fdc787aa9e9dc1e7026fa4c961b26563526b"
+		    }
+	    ]
+	},
+	{
+		"name": "libcue",
+		"cmake": true,
+	    	"config-opts": ["-DCMAKE_INSTALL_PREFIX=/app", "-DBUILD_SHARED_LIBS=ON"],
+		"sources": [
+			{ 
+				"type": "archive",
+				"url": "https://github.com/lipnitsk/libcue/archive/v2.1.0.tar.gz",
+				"sha256": "288ddd01e5f9e8f901d0c205d31507e4bdffd2540fa86073f2fe82de066d2abb"
+			  
+			}
+		]
+	},
+        {
+            "name": "dde-music",
+	    "no-autogen": true,
+            "sources": [
+                {
+                    "type": "file",
+                    "url": "http://pools.corp.deepin.com/ppa/dde/pool/main/d/deepin-music/deepin-music_3.1.0.orig.tar.xz",
+                    "sha256": "e6b92b106f0100fbbbbfe030624d141e782d42164c5da022370146a355e77eda"
+                },
+		{
+		    "type": "file",
+		    "path": "build-Makefile",
+		    "dest-filename": "Makefile"
+		}
+            ]
+        }
+    ]
+}
