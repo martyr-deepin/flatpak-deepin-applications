@@ -1,8 +1,0 @@
-VERSION := 3.1.0
-all:
-	tar xvf deepin-music_$(VERSION).orig.tar.xz
-	cd deepin-music-$(VERSION) && qmake PREFIX=/app .
-	cd deepin-music-$(VERSION) && make
-
-install:
-	cd deepin-music-$(VERSION) && make install 
