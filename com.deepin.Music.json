@@ -6,6 +6,8 @@
   "sdk": "com.deepin.Sdk",
   "command": "deepin-music",
   "separate-locales": false,
+  "rename-desktop-file": "deepin-music.desktop",
+  "rename-icon": "deepin-music",
   "tags": ["proprietary"],
   "finish-args": [
     /* X11 + XShm access */
