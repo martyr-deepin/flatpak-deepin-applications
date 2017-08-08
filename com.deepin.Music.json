@@ -1,8 +1,8 @@
 {
   "app-id": "com.deepin.Music",
-  "branch": "3.1",
+  "branch": "3.1.4-1",
   "runtime": "com.deepin.Platform",
-  "runtime-version": "15.4.1",
+  "runtime-version": "15.5",
   "sdk": "com.deepin.Sdk",
   "command": "deepin-music",
   "separate-locales": false,
@@ -50,7 +50,7 @@
       "config-opts": ["PREFIX=/app", "-r"],
       "sources": [{
           "type": "git",
-          "url": "https://github.com/linuxdeepin/deepin-music",
+          "url": "https://cr.deepin.io/deepin-music",
           "branch": "master"
         },
         {
