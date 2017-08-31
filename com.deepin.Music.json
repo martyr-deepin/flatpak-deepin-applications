@@ -1,6 +1,6 @@
 {
   "app-id": "com.deepin.Music",
-  "branch": "3.1.4-1",
+  "branch": "3.1.6",
   "runtime": "com.deepin.Platform",
   "runtime-version": "15.5",
   "sdk": "com.deepin.Sdk",
@@ -51,11 +51,14 @@
       "sources": [{
           "type": "git",
           "url": "https://cr.deepin.io/deepin-music",
-          "branch": "master"
+          "branch": "3.1.6"
         },
         {
           "type": "script",
-          "commands": ["qmake PREFIX=/app"],
+          "commands": [
+                "sed -i 's@\\[QT_INSTALL_LIBS\\]@{PREFIX}/lib@' libdmusic/libdmusic.pro",
+                "qmake PREFIX=/app"
+            ],
           "dest-filename": "configure"
         }
       ]
