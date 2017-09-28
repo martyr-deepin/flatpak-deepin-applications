@@ -1,0 +1,48 @@
+{
+	"app-id": "com.deepin.Calendar",
+	"runtime": "com.deepin.Platform",
+	"runtime-version": "15.5.1",
+	"sdk": "com.deepin.Sdk",
+	"command": "dde-calendar",
+	"separate-locales": false,
+	"branch": "master",
+	"tags": [
+		"proprietary"
+	],
+	"rename-desktop-file": "dde-calendar.desktop",
+	"rename-icon": "dde-calendar",
+	"finish-args": [
+		/* X11 + XShm access */
+		"--share=ipc",
+		"--socket=x11",
+		/* Sound access */
+		"--socket=pulseaudio",
+		/* Network access */
+		"--share=network",
+		/* OpenGL */
+		"--device=dri",
+		"--own-name=com.deepin.dde.Calendar"
+	],
+	"modules": [
+		{
+			"name": "dde-calendar",
+			"no-autogen": true,
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://github.com/linuxdeepin/dde-calendar",
+					"branch": "master"
+				},
+				{
+					"type": "script",
+					"commands": [
+						"sed -i 's|/usr|/app|g' dde-calendar.pro",
+						"sed -i 's|Exec=.*|Exec=/app/bin/dde-calendar|g' dde-calendar.desktop",
+						"qmake PREFIX=/app"
+					],
+					"dest-filename": "configure"
+				}
+			]
+		}
+	]
+}

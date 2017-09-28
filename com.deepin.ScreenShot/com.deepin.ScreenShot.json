@@ -1,0 +1,45 @@
+{
+    "app-id": "com.deepin.Screenshot",
+    "runtime": "com.deepin.Platform",
+    "runtime-version": "15.5.1",
+    "sdk": "com.deepin.Sdk",
+    "command": "deepin-screenshot",
+    "separate-locales": false,
+    "rename-desktop-file": "deepin-screenshot.desktop",
+    "rename-icon": "deepin-screenshot",
+    "tags": [
+        "proprietary"
+    ],
+    "finish-args": [
+        /* X11 + XShm access */
+        "--share=ipc",
+        "--socket=x11",
+        /* Sound access */
+        "--socket=pulseaudio",
+        /* Network access */
+        "--share=network",
+        /* OpenGL */
+        "--device=dri",
+        "--filesystem=home",
+        "--own-name=com.deepin.DeepinScreenshot"
+    ],
+    "modules": [
+        {
+            "name": "deepin-screenshot",
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "https://github.com/linuxdeepin/deepin-screenshot",
+                    "branch": "4.0.9"
+                },
+                {
+                    "type": "script",
+                    "commands": [
+                        "qmake PREFIX=/app"
+                    ],
+                    "dest-filename": "configure"
+                }
+            ]
+        }
+    ]
+}

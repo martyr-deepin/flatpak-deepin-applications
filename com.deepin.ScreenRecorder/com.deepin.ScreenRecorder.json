@@ -1,0 +1,65 @@
+{
+	"app-id": "com.deepin.ScreenRecorder",
+	"runtime": "com.deepin.Platform",
+	"runtime-version": "15.5.1",
+	"sdk": "com.deepin.Sdk",
+	"command": "deepin-screen-recorder",
+	"separate-locales": false,
+	"branch": "master",
+	"tags": [
+		"proprietary"
+	],
+	"rename-desktop-file": "deepin-screen-recorder.desktop",
+	"rename-icon": "deepin-screen-recorder",
+	"finish-args": [
+		/* X11 + XShm access */
+		"--share=ipc",
+		"--socket=x11",
+		/* Sound access */
+		"--socket=pulseaudio",
+		/* Network access */
+		"--share=network",
+		/* OpenGL */
+		"--device=dri"
+	],
+	"modules": [
+		"org.ffmpeg.FFmpeg.json",
+		{
+			"name": "dtkwm",
+			"no-autogen": true,
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://cr.deepin.io/dtkwm",
+					"branch": "master"
+				},
+				{
+					"type": "script",
+					"commands": [
+						"qmake PREFIX=/app"
+					],
+					"dest-filename": "configure"
+				}
+			]
+		},
+		{
+			"name": "deepin-screen-recorder",
+			"no-autogen": true,
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://cr.deepin.io/deepin-screen-recorder",
+					"branch": "master"
+				},
+				{
+					"type": "script",
+					"commands": [
+						"sed -i 's|/usr|/app|g' deepin-screen-recorder.pro",
+						"qmake PREFIX=/app"
+					],
+					"dest-filename": "configure"
+				}
+			]
+		}
+	]
+}

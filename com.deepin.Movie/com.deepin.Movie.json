@@ -1,0 +1,114 @@
+{
+  "app-id": "com.deepin.Movie",
+  "branch": "master",
+  "sdk": "com.deepin.Sdk",
+  "runtime": "com.deepin.Platform",
+  "runtime-version": "15.5.1",
+  "sdk": "com.deepin.Sdk",
+  "command": "deepin-movie",
+  "rename-icon": "deepin-movie",
+  "rename-desktop-file": "deepin-movie.desktop",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=x11",
+    "--socket=wayland",
+    "--device=dri",
+    "--share=network",
+    "--socket=pulseaudio"
+  ],
+  "modules": [
+    {
+      "name": "deepin-movie",
+      "cmake": true,
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://cr.deepin.io/deepin-movie-reborn",
+          "branch": "master"
+        },
+	{
+	  "type": "patch",
+	  "path": "0001-fix-cmake-add-libraries-links.patch"
+	}
+      ],
+      "modules": [
+        {
+          "name": "libmpv",
+          "cleanup": [
+            "/bin",
+            "/share"
+          ],
+          "buildsystem": "simple",
+          "build-commands": [
+            "rm -f /app/lib/libluajit-*.a",
+            "ln -sf /app/lib/libluajit-5.1.so.2 /app/lib/libluajit-5.1.so",
+            "python2 waf configure --prefix=/app --enable-libmpv-shared --enable-encoding",
+            "python2 waf build",
+            "python2 waf install"
+          ],
+          "sources": [
+            {
+              "type": "archive",
+              "url": "https://github.com/mpv-player/mpv/archive/v0.27.0.tar.gz",
+              "sha256": "341d8bf18b75c1f78d5b681480b5b7f5c8b87d97a0d4f53a5648ede9c219a49c"
+            },
+            {
+              "type": "file",
+              "url": "https://waf.io/waf-1.9.8",
+              "sha256": "167dc42bab6d5bd823b798af195420319cb5c9b571e00db7d83df2a0fe1f4dbf",
+              "dest-filename": "waf"
+            }
+          ],
+          "modules": [
+            "org.ffmpeg.FFmpeg.json",
+            "org.luajit.Luajit.json",
+	    { "name": "ffmpegthumbnailer",
+	      "cmake": true,
+	      "config-opts": [
+		      "-DCMAKE_INSTALL_LIBDIR=lib",
+		      "-DENABLE_THUMBNAILER=ON"
+	      ],
+	      "sources": [
+		      {
+			      "type": "archive",
+			      "url": "https://github.com/dirkvdb/ffmpegthumbnailer/archive/2.2.0.tar.gz",
+			      "sha256": "8bc74755aa960531acdea8fa19ad7e1b7c806c28a068306a8c7150d278241a8f"
+		      }
+	      ]
+	    },
+            {
+              "name": "libass",
+              "config-opts": [
+                "--disable-static"
+              ],
+              "sources": [
+                {
+                  "type": "archive",
+                  "url": "https://github.com/libass/libass/releases/download/0.13.7/libass-0.13.7.tar.xz",
+                  "sha256": "7065e5f5fb76e46f2042a62e7c68d81e5482dbeeda24644db1bd066e44da7e9d"
+                }
+              ],
+              "modules": [
+                {
+                  "name": "fribidi",
+                  "cleanup": [
+                    "/bin",
+                    "/include",
+                    "/lib/pkgconfig"
+                  ],
+                  "sources": [
+                    {
+                      "type": "archive",
+                      "url": "http://fribidi.org/download/fribidi-0.19.7.tar.bz2",
+                      "sha256": "08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

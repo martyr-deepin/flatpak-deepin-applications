@@ -2,7 +2,7 @@
   "app-id": "com.deepin.Music",
   "branch": "3.1.6",
   "runtime": "com.deepin.Platform",
-  "runtime-version": "15.5",
+  "runtime-version": "15.5.1",
   "sdk": "com.deepin.Sdk",
   "command": "deepin-music",
   "separate-locales": false,
@@ -17,12 +17,35 @@
     /* Network access */
     "--share=network",
     /* OpenGL */
-    "--filesystem=home",
     "--device=dri",
-    "--own-name=org.mpris.MediaPlayer2.DeepinMusic"
+    "--filesystem=host",
+    "--filesystem=~/.config/dconf:rw",
+    "--own-name=org.mpris.MediaPlayer2.DeepinMusic",
+    "--talk-name=org.freedesktop.Notifications",
+    "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
   ],
   "modules": [
     "org.ffmpeg.FFmpeg.json",
+    {
+	    "name": "gst-libav",
+	    "config-opts": [ "--disable-gtk-doc"],
+	    "cleanup": [ "*.la", "/share/gtk-doc" ],
+	    "sources": [{
+		    "type": "archive",
+		    "url": "https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-1.10.4.tar.xz",
+		    "sha256": "6ca0feca75e3d48315e07f20ec37cf6260ed1e9dde58df355febd5016246268b"
+	    }]
+    },
+    {
+	    "name": "gst-plugins-ugly",
+	    "config-opts": [ "--disable-gtk-doc"],
+	    "cleanup": [ "*.la", "/share/gtk-doc" ],
+	    "sources": [{
+		    "type": "archive",
+		    "url": "https://gstreamer.freedesktop.org/src/gst-plugins-ugly/gst-plugins-ugly-1.10.5.tar.xz",
+		    "sha256": "d6edc046350809c967f5b058c5c2e534d99d1d69fe1b26acd849e87781a7d7fc"
+	    }]
+    },
     {
       "name": "taglib",
       "cmake": true,

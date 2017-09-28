@@ -1,4 +1,4 @@
-BUILDER_OPTIONS = --force-clean --ccache --rebuild-on-sdk-change
+BUILDER_OPTIONS = --disable-rofiles-fuse --force-clean --ccache --rebuild-on-sdk-change 
 TARGET_REPO = repo
 FLATPAK_BUILDER = $(shell which flatpak-builder)
 MANIFEST = com.deepin.Music.json

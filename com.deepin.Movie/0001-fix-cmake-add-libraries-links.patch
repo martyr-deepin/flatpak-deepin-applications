@@ -1,0 +1,91 @@
+From 372a6056557d05c6caf5d6614e8e1db78e309015 Mon Sep 17 00:00:00 2001
+From: flatpak-builder <flatpak-builder@localhost.pc>
+Date: Mon, 18 Sep 2017 15:54:41 +0800
+Subject: [PATCH] add ffmpeg link target
+
+---
+ src/CMakeLists.txt | 58 ++++++++++++++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 54 insertions(+), 4 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 7bc9507..d50a72b 100644
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -24,8 +24,8 @@ find_package(Qt5Sql)
+ pkg_check_modules(Dtk REQUIRED IMPORTED_TARGET dtkwidget)
+ pkg_check_modules(Mpv REQUIRED IMPORTED_TARGET mpv)
+ pkg_check_modules(Xcb REQUIRED IMPORTED_TARGET xcb xcb-aux xcb-proto xcb-ewmh xcb-shape)
+-pkg_check_modules(Other REQUIRED IMPORTED_TARGET libffmpegthumbnailer 
+-    libavformat libavutil libavcodec libavresample libpulse libpulse-simple
++pkg_check_modules(FFMPEGTHUMBNAILER REQUIRED IMPORTED_TARGET libffmpegthumbnailer)
++pkg_check_modules(Other REQUIRED IMPORTED_TARGET libavformat libavutil libavcodec libavresample libpulse libpulse-simple
+     openssl)
+ 
+ qt5_add_resources(RCS resources.qrc)
+@@ -76,11 +76,61 @@ add_dependencies(${CMD_NAME} json_i18n)
+ target_include_directories(${CMD_NAME} PUBLIC ${PROJECT_INCLUDE})
+ 
+ set(TARGET_LIBS X11 Xext Xtst PkgConfig::Xcb Qt5::Widgets Qt5::X11Extras Qt5::Network
+-    Qt5::Concurrent Qt5::DBus Qt5::Sql PkgConfig::Dtk PkgConfig::Mpv PkgConfig::Other pthread)
++        Qt5::Concurrent Qt5::DBus Qt5::Sql PkgConfig::Dtk PkgConfig::Mpv PkgConfig::FFMPEGTHUMBNAILER PkgConfig::Other pthread)
++
++
++PKG_CHECK_MODULES(AVCODEC_PKG libavcodec REQUIRED)
++PKG_CHECK_MODULES(AVFORMAT_PKG libavformat REQUIRED)
++PKG_CHECK_MODULES(AVUTIL_PKG libavutil REQUIRED)
++PKG_CHECK_MODULES(AVFILTER_PKG libavfilter REQUIRED)
++
++FIND_PATH(AVCODEC_INCLUDE_DIR
++    NAMES libavcodec/avcodec.h
++    PATHS ${AVCODEC_PKG_INCLUDE_DIRS}
++)
++
++FIND_PATH(AVFORMAT_INCLUDE_DIR
++    NAMES libavcodec/avcodec.h
++    PATHS ${AVFORMAT_PKG_INCLUDE_DIRS}
++)
++
++FIND_PATH(AVUTIL_INCLUDE_DIR
++    NAMES libavutil/avutil.h
++    PATHS ${AVUTIL_PKG_INCLUDE_DIRS}
++)
++
++FIND_PATH(AVFILTER_INCLUDE_DIR
++    NAMES libavfilter/avfilter.h
++    PATHS ${AVFILTER_PKG_INCLUDE_DIRS}
++)
++
++FIND_LIBRARY(AVCODEC_LIBRARY
++    NAMES ${AVCODEC_PKG_LIBRARIES}
++    PATHS ${AVCODEC_PKG_LIBRARY_DIRS}
++)
++
++FIND_LIBRARY(AVFORMAT_LIBRARY
++    NAMES ${AVFORMAT_PKG_LIBRARIES}
++    PATHS ${AVFORMAT_PKG_LIBRARY_DIRS}
++)
++
++FIND_LIBRARY(AVUTIL_LIBRARY
++    NAMES ${AVUTIL_PKG_LIBRARIES}
++    PATHS ${AVUTIL_PKG_LIBRARY_DIRS}
++)
++
++FIND_LIBRARY(AVFILTER_LIBRARY
++    NAMES ${AVFILTER_PKG_LIBRARIES}
++    PATHS ${AVFILTER_PKG_LIBRARY_DIRS}
++)
++
++LIST(APPEND FFMPEG_INCLUDE_DIRS ${AVFORMAT_INCLUDE_DIR} ${AVCODEC_INCLUDE_DIR} ${AVUTIL_INCLUDE_DIR} ${AVFILTER_INCLUDE_DIR})
++LIST(APPEND FFMPEG_LIBRARIES ${AVFORMAT_LIBRARY} ${AVCODEC_LIBRARY} ${AVUTIL_LIBRARY} ${AVFILTER_LIBRARY})
++
+ if (ENABLE_VPU_PLATFORM) 
+     list(APPEND TARGET_LIBS GAL pulse pulse-simple)
+ endif()
+-target_link_libraries(${CMD_NAME} ${TARGET_LIBS})
++target_link_libraries(${CMD_NAME} ${TARGET_LIBS} ${FFMPEG_LIBRARIES})
+ 
+ 
+ install(TARGETS ${CMD_NAME} DESTINATION bin)
+-- 
+2.14.1
+

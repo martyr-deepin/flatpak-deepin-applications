@@ -1,0 +1,190 @@
+{
+	"app-id": "com.deepin.ImageViewer",
+	"runtime": "com.deepin.Platform",
+	"runtime-version": "15.5.1",
+	"sdk": "com.deepin.Sdk",
+	"command": "deepin-image-viewer",
+	"separate-locales": false,
+	"tags": [
+		"proprietary"
+	],
+	"rename-desktop-file": "deepin-image-viewer.desktop",
+	"rename-icon": "deepin-image-viewer",
+	"finish-args": [
+		/* X11 + XShm access */
+		"--share=ipc",
+		"--socket=x11",
+		/* Sound access */
+		"--socket=pulseaudio",
+		/* Network access */
+		"--share=network",
+		/* OpenGL */
+		"--device=dri",
+		"--filesystem=home",
+		"--own-name=com.deepin.DeepinImageViewer"
+	],
+	"modules": [
+		{
+			"name": "libexif",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/libe/libexif/libexif_0.6.21.orig.tar.gz",
+					"sha256": "edb7eb13664cf950a6edd132b75e99afe61c5effe2f16494e6d27bc404b287bf"
+				}
+			]
+		},
+		{
+			"name": "ilmbase",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/i/ilmbase/ilmbase_2.2.0.orig.tar.gz",
+					"sha256": "ecf815b60695555c1fbc73679e84c7c9902f4e8faa6e8000d2f905b8b86cedc7"
+				}
+			]
+		},
+		{
+			"name": "openexr",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/o/openexr/openexr_2.2.0.orig.tar.gz",
+					"sha256": "36a012f6c43213f840ce29a8b182700f6cf6b214bea0d5735594136b44914231"
+				}
+			]
+		},
+		{
+			"name": "openjpeg2",
+			"cmake": true,
+			"config-opts": [
+				"-DCMAKE_INSTALL_PREFIX=/app",
+				"-DBUILD_SHARED_LIBS=ON"
+			],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/o/openjpeg2/openjpeg2_2.1.2.orig.tar.gz",
+					"sha256": "4ce77b6ef538ef090d9bde1d5eeff8b3069ab56c4906f083475517c2c023dfa7"
+				}
+			]
+		},
+		{
+			"name": "jxrlib",
+			"cmake": true,
+			"config-opts": [
+				"-DCMAKE_INSTALL_PREFIX=/app",
+				"-DBUILD_SHARED_LIBS=ON"
+			],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/j/jxrlib/jxrlib_1.1.orig.tar.gz",
+					"sha256": "c7287b86780befa0914f2eeb8be2ac83e672ebd4bd16dc5574a36a59d9708303"
+				},
+				{
+					"type": "archive",
+					"path": "jxrlib_1.1-6.debian.tar.xz"
+				},
+				{
+					"type": "shell",
+					"commands": [
+						"patch -i patches/usecmake.patch",
+						"patch -Np1 -i patches/bug748590.patch",
+						"patch -Np1 -i patches/typos.patch"
+					]
+				}
+			]
+		},
+		{
+			"name": "openjpeg-turbo",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/libj/libjpeg-turbo/libjpeg-turbo_1.5.1.orig.tar.gz",
+					"sha256": "41429d3d253017433f66e3d472b8c7d998491d2f41caa7306b8d9a6f2a2c666c"
+				}
+			]
+		},
+		{
+			"name": "libraw",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://www.libraw.org/data/LibRaw-0.18.2.tar.gz",
+					"sha256": "ce366bb38c1144130737eb16e919038937b4dc1ab165179a225d5e847af2abc6"
+				}
+			]
+		},
+		{
+			"name": "libtiff",
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/t/tiff/tiff_4.0.8.orig.tar.gz",
+					"sha256": "59d7a5a8ccd92059913f246877db95a2918e6c04fb9d43fd74e5c3390dac2910"
+				}
+			]
+		},
+		{
+			"name": "libwebp",
+			"config-opts": [
+				"--enable-libwebpmux",
+				"--enable-libwebpdemux",
+				"--enable-aligned"
+			],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/libw/libwebp/libwebp_0.5.2.orig.tar.gz",
+					"sha256": "b75310c810b3eda222c77f6d6c26b061240e3d9060095de44b2c1bae291ecdef"
+				}
+			]
+		},
+		{
+			"name": "freeimage",
+			"buildsystem": "simple",
+			"build-commands": [
+				"for f in $(ls patches/*.patch); do patch -Np1 -i ${f};done",
+				"sh gensrclist.sh",
+				"sh genfipsrclist.sh",
+				"sed -i 's|-o root -g root||g' Makefile.gnu",
+				"sed -i 's|-o root -g root||g' Makefile.fip",
+				"make",
+				"make -f Makefile.fip",
+				"make install INSTALLDIR=/app/lib INCDIR=/app/include",
+				"make -f Makefile.fip install INSTALLDIR=/app/lib INCDIR=/app/include"
+			],
+			"sources": [
+				{
+					"type": "archive",
+					"url": "http://pools.corp.deepin.com/deepin/pool/main/f/freeimage/freeimage_3.17.0+ds1.orig.tar.xz",
+					"sha256": "7742f3d4edf9bc7f3a3f6c5baa9f5546e85cffa575944455e0dc10e3c13263db"
+				},
+				{
+					"type": "archive",
+					"path": "freeimage_3.17.0+ds1-5.debian.tar.xz"
+				}
+			]
+		},
+		{
+			"name": "image-viewer",
+			"sources": [
+				{
+					"type": "git",
+					"url": "https://github.com/linuxdeepin/deepin-image-viewer",
+					"branch": "1.2.15"
+				},
+				{
+					"type": "script",
+					"commands": [
+						"sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' viewer/viewer.pro",
+						"sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' qimage-plugins/freeimage/freeimage.pro",
+						"qmake PREFIX=/app"
+					],
+					"dest-filename": "configure"
+				}
+			]
+		}
+	]
+}
