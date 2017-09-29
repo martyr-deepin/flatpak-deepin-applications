@@ -1,0 +1,5 @@
+#!/bin/sh
+if flatpak info --system  com.deepin.ScreenShot/x86_64/master >/dev/null 2>&1; then
+	flatpak uninstall --system com.deepin.ScreenShot/x86_64/master
+fi
+exit 0

@@ -1,0 +1,5 @@
+#!/bin/sh
+if flatpak info --system  app/com.deepin.ViewerImager/x86_64/master >/dev/null 2>&1; then
+    flatpak uninstall --system app/com.deepin.ViewerImager/x86_64/master
+fi
+exit 0
