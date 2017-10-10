@@ -3,14 +3,17 @@ TARGET_REPO = repo
 FLATPAK_BUILDER = $(shell which flatpak-builder)
 MANIFEST = com.deepin.VoiceRecorder.json
 
-all: build
+all: build bundle
 
 build: $(MANIFEST)
-				$(FLATPAK_BUILDER) \
-								$(BUILDER_OPTIONS) \
-								--repo=$(TARGET_REPO) \
-								build \
-								$(MANIFEST)
+	$(FLATPAK_BUILDER) \
+		$(BUILDER_OPTIONS) \
+		--repo=$(TARGET_REPO) \
+		voicerecorder \
+		$(MANIFEST)
+
+bundle:
+	flatpak build-bundle ./repo bundle com.deepin.VoiceRecorder master
 
 clean:
-	rm -rf build repo .flatpak-builder
+	rm -rf voicerecorder repo .flatpak-builder
