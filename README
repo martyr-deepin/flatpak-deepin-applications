@@ -1,0 +1,10 @@
+＃提交规范：
+##commit changelog 格式：
+project1:***
+project2:***
+***
+###例如：com.deepin.Music:support hidpi
+###这样描述信息会触发com.deepin.Music打包
+###自动打包会提取project名变化，触发项目里面具体目录打包。
+
+
