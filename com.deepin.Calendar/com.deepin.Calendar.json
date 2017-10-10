@@ -21,7 +21,8 @@
 		"--share=network",
 		/* OpenGL */
 		"--device=dri",
-		"--own-name=com.deepin.dde.Calendar"
+		"--own-name=com.deepin.dde.Calendar",
+		"--own-name=com.deepin.SingleInstance.dde-calendar"
 	],
 	"modules": [
 		{
