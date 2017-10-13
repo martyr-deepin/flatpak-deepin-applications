@@ -102,7 +102,11 @@
 				{
 					"type": "archive",
 					"url": "http://http.debian.net/debian/pool/main/libj/libjpeg-turbo/libjpeg-turbo_1.5.2.orig.tar.gz",
+<<<<<<< HEAD
+					"sha256": "9098943b270388727ae61de82adec73cf9f0dbb240b3bc8b172595ebf405b528"
+=======
 					"sha256": "41429d3d253017433f66e3d472b8c7d998491d2f41caa7306b8d9a6f2a2c666c"
+>>>>>>> 75d1164df974da1945599e7cd424ce763306dcfc
 				}
 			]
 		},
@@ -135,9 +139,9 @@
 			],
 			"sources": [
 				{
-					"type": "archive",
-					"url": "http://pools.corp.deepin.com/deepin/pool/main/libw/libwebp/libwebp_0.6.0.orig.tar.gz",
-					"sha256": "c928119229d4f8f35e20113ffb61f281eda267634a8dc2285af4b0ee27cf2b40"
+					"type": "git",
+					"url": "https://github.com/webmproject/libwebp.git",
+					"branch": "0.6.0"
 				}
 			]
 		},
@@ -145,12 +149,13 @@
 			"name": "freeimage",
 			"buildsystem": "simple",
 			"build-commands": [
-				"for f in $(ls patches/*.patch); do patch -Np1 -i ${f};done",
-				"sh gensrclist.sh",
-				"sh genfipsrclist.sh",
+				"for f in $(cat patches/series); do patch -Np1 -i patches/${f};done",
 				"sed -i 's|-o root -g root||g' Makefile.gnu",
 				"sed -i 's|-o root -g root||g' Makefile.fip",
-				"make",
+				"sed -i 's|/usr/include/jxrlib|/app/include/jxrlib|g' Makefile.gnu",
+				"sh gensrclist.sh",
+				"make -f Makefile.gnu",
+				"sh genfipsrclist.sh",
 				"make -f Makefile.fip",
 				"make install INSTALLDIR=/app/lib INCDIR=/app/include",
 				"make -f Makefile.fip install INSTALLDIR=/app/lib INCDIR=/app/include"
@@ -158,12 +163,17 @@
 			"sources": [
 				{
 					"type": "archive",
+<<<<<<< HEAD
+					"url": "http://http.debian.net/debian/pool/main/f/freeimage/freeimage_3.17.0+ds1.orig.tar.xz",
+=======
 					"url": "https://sourceforge.net/projects/freeimage/files/Source%20Distribution/3.17.0/FreeImage3170.zip",
+>>>>>>> 75d1164df974da1945599e7cd424ce763306dcfc
 					"sha256": "7742f3d4edf9bc7f3a3f6c5baa9f5546e85cffa575944455e0dc10e3c13263db"
 				},
 				{
 					"type": "archive",
-					"path": "freeimage_3.17.0+ds1-5.debian.tar.xz"
+					"url": "http://http.debian.net/debian/pool/main/f/freeimage/freeimage_3.17.0+ds1-5.debian.tar.xz",
+					"sha256": "0517461afdfc5feb5bdb25fd581f1f49cc10cf2cae8b5691428efb6d4b5b486e"
 				}
 			]
 		},
