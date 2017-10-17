@@ -175,7 +175,7 @@
 				{
 					"type": "git",
 					"url": "https://github.com/linuxdeepin/deepin-image-viewer",
-					"branch": "1.2.15"
+					"branch": "master"
 				},
 				{
 					"type": "script",
