@@ -1,12 +1,12 @@
 #!/bin/sh
-flatpak install --system --bundle  /usr/share/deepin-flatpak/app/com.deepin.ScreenShot/x86_64/master/bundle
-rm /usr/share/deepin-flatpak/app/com.deepin.ScreenShot/x86_64/master/bundle
-flatpak run -v --command=fc-cache com.deepin.ScreenShot -v
+flatpak install --system --bundle  /usr/share/deepin-flatpak/app/com.deepin.Screenshot/x86_64/master/bundle
+rm /usr/share/deepin-flatpak/app/com.deepin.Screenshot/x86_64/master/bundle
+flatpak run -v --command=fc-cache com.deepin.Screenshot -v
 for f in `ls -d /home/*/`;
 	do
-		mkdir -p $f/.var/app/com.deepin.ScreenShot/cache/;
+		mkdir -p $f/.var/app/com.deepin.Screenshot/cache/;
 		USER=`echo $f|cut -d '/' -f 3`;
-		cp -rf /root/.var/app/com.deepin.ScreenShot/cache/fontconfig/ $f.var/app/com.deepin.ScreenShot/cache/
+		cp -rf /root/.var/app/com.deepin.Screenshot/cache/fontconfig/ $f.var/app/com.deepin.Screenshot/cache/
 		chown -R $USER:$USER $f/.var/
 done
 

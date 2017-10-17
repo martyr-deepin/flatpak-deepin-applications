@@ -1,7 +1,7 @@
 BUILDER_OPTIONS = --force-clean --ccache --require-changes
 TARGET_REPO = repo
 FLATPAK_BUILDER = $(shell which flatpak-builder)
-MANIFEST = com.deepin.ScreenShot.json
+MANIFEST = com.deepin.Screenshot.json
 
 all: build bundle
 
@@ -12,7 +12,7 @@ build: $(MANIFEST)
 		screenshot \
 		$(MANIFEST)
 bundle:
-	 flatpak build-bundle ./repo bundle com.deepin.ScreenShot master
+	 flatpak build-bundle ./repo bundle com.deepin.Screenshot master
 
 
 clean:
