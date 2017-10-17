@@ -1,4 +1,4 @@
-BUILDER_OPTIONS = --force-clean --ccache --require-changes
+BUILDER_OPTIONS = --force-clean --ccache
 TARGET_REPO = repo
 FLATPAK_BUILDER = $(shell which flatpak-builder)
 MANIFEST = com.deepin.Screenshot.json
