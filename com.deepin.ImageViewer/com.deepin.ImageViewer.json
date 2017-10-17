@@ -29,7 +29,7 @@
 			"sources": [
 				{
 					"type": "archive",
-					"url": "https://downloads.sourceforge.net/sourceforge/libexif/libexif-0.6.21.tar.bz2",
+					"path": "libexif-0.6.21.tar.bz2",
 					"sha256": "16cdaeb62eb3e6dfab2435f7d7bccd2f37438d21c5218ec4e58efa9157d4d41a"
 				}
 			]
