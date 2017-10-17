@@ -3,7 +3,7 @@
   "branch": "master",
   "sdk": "com.deepin.Sdk",
   "runtime": "com.deepin.Platform",
-  "runtime-version": "15.5.1",
+  "runtime-version": "15.5",
   "sdk": "com.deepin.Sdk",
   "command": "deepin-movie",
   "rename-icon": "deepin-movie",
