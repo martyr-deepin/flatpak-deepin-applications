@@ -15,4 +15,4 @@ bundle:
 	flatpak build-bundle ./repo bundle com.deepin.ImageViewer master
 
 clean:
-	rm -rf image-viewer repo .flatpak-builder
+	rm -rf image-viewer repo

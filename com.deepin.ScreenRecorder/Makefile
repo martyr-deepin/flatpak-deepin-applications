@@ -16,4 +16,4 @@ bundle:
 
 
 clean:
-	rm -rf screenrecorder repo .flatpak-builder
+	rm -rf screenrecorder repo

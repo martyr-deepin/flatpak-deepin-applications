@@ -16,4 +16,4 @@ bundle:
 	flatpak build-bundle ./repo bundle com.deepin.Music master
 
 clean:
-	rm -rf sublime repo .flatpak-builder
+	rm -rf sublime repo

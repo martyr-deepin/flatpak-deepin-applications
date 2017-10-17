@@ -16,4 +16,4 @@ bundle:
 
 
 clean:
-	rm -rf screenshot repo .flatpak-builder
+	rm -rf screenshot repo
