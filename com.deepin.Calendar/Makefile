@@ -9,7 +9,7 @@ build: $(MANIFEST)
 	$(FLATPAK_BUILDER) \
 		$(BUILDER_OPTIONS) \
 		--repo=$(TARGET_REPO) \
-		calendar \
+		app \
 		$(MANIFEST)
 bundle:
 	flatpak build-bundle ./repo bundle com.deepin.Calendar master

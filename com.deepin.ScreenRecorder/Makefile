@@ -9,7 +9,7 @@ build: $(MANIFEST)
 	$(FLATPAK_BUILDER) \
 		$(BUILDER_OPTIONS) \
 		--repo=$(TARGET_REPO) \
-		screenrecorder \
+		app \
 		$(MANIFEST)
 bundle:
 	 flatpak build-bundle ./repo bundle com.deepin.ScreenRecorder master

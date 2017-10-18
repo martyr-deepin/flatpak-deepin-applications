@@ -1,192 +1,189 @@
 {
-	"app-id": "com.deepin.ImageViewer",
-	"runtime": "com.deepin.Platform",
-	"runtime-version": "15.5",
-	"sdk": "com.deepin.Sdk",
-	"command": "deepin-image-viewer",
-	"separate-locales": false,
-	"tags": [
-		"proprietary"
-	],
-	"rename-desktop-file": "deepin-image-viewer.desktop",
-	"rename-icon": "deepin-image-viewer",
-	"finish-args": [
-		/* X11 + XShm access */
-		"--share=ipc",
-		"--socket=x11",
-		/* Sound access */
-		"--socket=pulseaudio",
-		/* Network access */
-		"--share=network",
-		/* OpenGL */
-		"--device=dri",
-		"--filesystem=home",
-		"--own-name=com.deepin.DeepinImageViewer"
-	],
-	"modules": [
-		{
-			"name": "libexif",
-			"sources": [
-				{
-					"type": "archive",
-					"path": "libexif-0.6.21.tar.bz2",
-					"sha256": "16cdaeb62eb3e6dfab2435f7d7bccd2f37438d21c5218ec4e58efa9157d4d41a"
-				}
-			]
-		},
-		{
-			"name": "ilmbase",
-			"sources": [
-				{
-					"type": "archive",
-					"path": "ilmbase-2.2.0.tar.gz",
-					"sha256": "ecf815b60695555c1fbc73679e84c7c9902f4e8faa6e8000d2f905b8b86cedc7"
-				}
-			]
-		},
-		{
-			"name": "openexr",
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://download.savannah.nongnu.org/releases/openexr/openexr-2.2.0.tar.gz",
-					"sha256": "36a012f6c43213f840ce29a8b182700f6cf6b214bea0d5735594136b44914231"
-				}
-			]
-		},
-		{
-			"name": "openjpeg2",
-			"cmake": true,
-			"config-opts": [
-				"-DCMAKE_INSTALL_PREFIX=/app",
-				"-DBUILD_SHARED_LIBS=ON"
-			],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz",
-					"sha256": "3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a"
-				}
-			]
-		},
-		{
-			"name": "jxrlib",
-			"cmake": true,
-			"config-opts": [
-				"-DCMAKE_INSTALL_PREFIX=/app",
-				"-DBUILD_SHARED_LIBS=ON"
-			],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://http.debian.net/debian/pool/main/j/jxrlib/jxrlib_1.1.orig.tar.gz",
-					"sha256": "c7287b86780befa0914f2eeb8be2ac83e672ebd4bd16dc5574a36a59d9708303"
-				},
-				{
-					"type": "archive",
-					"path": "jxrlib_1.1-6.debian.tar.xz"
-				},
-				{
-					"type": "shell",
-					"commands": [
-						"patch -i patches/usecmake.patch",
-						"patch -Np1 -i patches/bug748590.patch",
-						"patch -Np1 -i patches/typos.patch"
-					]
-				}
-			]
-		},
-		{
-			"name": "openjpeg-turbo",
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://http.debian.net/debian/pool/main/libj/libjpeg-turbo/libjpeg-turbo_1.5.2.orig.tar.gz",
-					"sha256": "9098943b270388727ae61de82adec73cf9f0dbb240b3bc8b172595ebf405b528"
-				}
-			]
-		},
-		{
-			"name": "libraw",
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://www.libraw.org/data/LibRaw-0.18.2.tar.gz",
-					"sha256": "ce366bb38c1144130737eb16e919038937b4dc1ab165179a225d5e847af2abc6"
-				}
-			]
-		},
-		{
-			"name": "libtiff",
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://download.osgeo.org/libtiff/tiff-4.0.8.tar.gz",
-					"sha256": "59d7a5a8ccd92059913f246877db95a2918e6c04fb9d43fd74e5c3390dac2910"
-				}
-			]
-		},
-		{
-			"name": "libwebp",
-			"config-opts": [
-				"--enable-libwebpmux",
-				"--enable-libwebpdemux",
-				"--enable-aligned"
-			],
-			"sources": [
-				{
-					"type": "git",
-					"url": "https://github.com/webmproject/libwebp.git",
-					"branch": "0.6.0"
-				}
-			]
-		},
-		{
-			"name": "freeimage",
-			"buildsystem": "simple",
-			"build-commands": [
-				"for f in $(cat patches/series); do patch -Np1 -i patches/${f};done",
-				"sed -i 's|-o root -g root||g' Makefile.gnu",
-				"sed -i 's|-o root -g root||g' Makefile.fip",
-				"sed -i 's|/usr/include/jxrlib|/app/include/jxrlib|g' Makefile.gnu",
-				"sh gensrclist.sh",
-				"make -f Makefile.gnu",
-				"sh genfipsrclist.sh",
-				"make -f Makefile.fip",
-				"make install INSTALLDIR=/app/lib INCDIR=/app/include",
-				"make -f Makefile.fip install INSTALLDIR=/app/lib INCDIR=/app/include"
-			],
-			"sources": [
-				{
-					"type": "archive",
-					"url": "http://http.debian.net/debian/pool/main/f/freeimage/freeimage_3.17.0+ds1.orig.tar.xz",
-					"sha256": "7742f3d4edf9bc7f3a3f6c5baa9f5546e85cffa575944455e0dc10e3c13263db"
-				},
-				{
-					"type": "archive",
-					"url": "http://http.debian.net/debian/pool/main/f/freeimage/freeimage_3.17.0+ds1-5.debian.tar.xz",
-					"sha256": "0517461afdfc5feb5bdb25fd581f1f49cc10cf2cae8b5691428efb6d4b5b486e"
-				}
-			]
-		},
-		{
-			"name": "image-viewer",
-			"sources": [
-				{
-					"type": "git",
-					"url": "https://github.com/linuxdeepin/deepin-image-viewer",
-					"branch": "master"
-				},
-				{
-					"type": "script",
-					"commands": [
-						"sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' viewer/viewer.pro",
-						"sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' qimage-plugins/freeimage/freeimage.pro",
-						"qmake PREFIX=/app"
-					],
-					"dest-filename": "configure"
-				}
-			]
-		}
-	]
+  "app-id": "com.deepin.ImageViewer",
+  "runtime": "com.deepin.Platform",
+  "runtime-version": "15.5",
+  "sdk": "com.deepin.Sdk",
+  "command": "deepin-image-viewer",
+  "separate-locales": false,
+  "tags": [
+    "proprietary"
+  ],
+  "rename-desktop-file": "deepin-image-viewer.desktop",
+  "rename-icon": "deepin-image-viewer",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=x11",
+    "--socket=pulseaudio",
+    "--share=network",
+    "--device=dri",
+    "--filesystem=home",
+    "--talk-name=org.freedesktop.FileManager1",
+    "--own-name=com.deepin.DeepinImageViewer"
+  ],
+  "modules": [
+    {
+      "name": "libexif",
+      "sources": [
+        {
+          "type": "archive",
+          "path": "libexif-0.6.21.tar.bz2",
+          "sha256": "16cdaeb62eb3e6dfab2435f7d7bccd2f37438d21c5218ec4e58efa9157d4d41a"
+        }
+      ]
+    },
+    {
+      "name": "ilmbase",
+      "sources": [
+        {
+          "type": "archive",
+          "path": "ilmbase-2.2.0.tar.gz",
+          "sha256": "ecf815b60695555c1fbc73679e84c7c9902f4e8faa6e8000d2f905b8b86cedc7"
+        }
+      ]
+    },
+    {
+      "name": "openexr",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.savannah.nongnu.org/releases/openexr/openexr-2.2.0.tar.gz",
+          "sha256": "36a012f6c43213f840ce29a8b182700f6cf6b214bea0d5735594136b44914231"
+        }
+      ]
+    },
+    {
+      "name": "openjpeg2",
+      "cmake": true,
+      "config-opts": [
+        "-DCMAKE_INSTALL_PREFIX=/app",
+        "-DBUILD_SHARED_LIBS=ON"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz",
+          "sha256": "3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a"
+        }
+      ]
+    },
+    {
+      "name": "jxrlib",
+      "cmake": true,
+      "config-opts": [
+        "-DCMAKE_INSTALL_PREFIX=/app",
+        "-DBUILD_SHARED_LIBS=ON"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://http.debian.net/debian/pool/main/j/jxrlib/jxrlib_1.1.orig.tar.gz",
+          "sha256": "c7287b86780befa0914f2eeb8be2ac83e672ebd4bd16dc5574a36a59d9708303"
+        },
+        {
+          "type": "archive",
+          "path": "jxrlib_1.1-6.debian.tar.xz"
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "patch -i patches/usecmake.patch",
+            "patch -Np1 -i patches/bug748590.patch",
+            "patch -Np1 -i patches/typos.patch"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "openjpeg-turbo",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://http.debian.net/debian/pool/main/libj/libjpeg-turbo/libjpeg-turbo_1.5.2.orig.tar.gz",
+          "sha256": "9098943b270388727ae61de82adec73cf9f0dbb240b3bc8b172595ebf405b528"
+        }
+      ]
+    },
+    {
+      "name": "libraw",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://www.libraw.org/data/LibRaw-0.18.2.tar.gz",
+          "sha256": "ce366bb38c1144130737eb16e919038937b4dc1ab165179a225d5e847af2abc6"
+        }
+      ]
+    },
+    {
+      "name": "libtiff",
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.osgeo.org/libtiff/tiff-4.0.8.tar.gz",
+          "sha256": "59d7a5a8ccd92059913f246877db95a2918e6c04fb9d43fd74e5c3390dac2910"
+        }
+      ]
+    },
+    {
+      "name": "libwebp",
+      "config-opts": [
+        "--enable-libwebpmux",
+        "--enable-libwebpdemux",
+        "--enable-aligned"
+      ],
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/webmproject/libwebp.git",
+          "branch": "0.6.0"
+        }
+      ]
+    },
+    {
+      "name": "freeimage",
+      "buildsystem": "simple",
+      "build-commands": [
+        "for f in $(cat patches/series); do patch -Np1 -i patches/${f};done",
+        "sed -i 's|-o root -g root||g' Makefile.gnu",
+        "sed -i 's|-o root -g root||g' Makefile.fip",
+        "sed -i 's|/usr/include/jxrlib|/app/include/jxrlib|g' Makefile.gnu",
+        "sh gensrclist.sh",
+        "make -f Makefile.gnu",
+        "sh genfipsrclist.sh",
+        "make -f Makefile.fip",
+        "make install INSTALLDIR=/app/lib INCDIR=/app/include",
+        "make -f Makefile.fip install INSTALLDIR=/app/lib INCDIR=/app/include"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://http.debian.net/debian/pool/main/f/freeimage/freeimage_3.17.0+ds1.orig.tar.xz",
+          "sha256": "7742f3d4edf9bc7f3a3f6c5baa9f5546e85cffa575944455e0dc10e3c13263db"
+        },
+        {
+          "type": "archive",
+          "url": "http://http.debian.net/debian/pool/main/f/freeimage/freeimage_3.17.0+ds1-5.debian.tar.xz",
+          "sha256": "0517461afdfc5feb5bdb25fd581f1f49cc10cf2cae8b5691428efb6d4b5b486e"
+        }
+      ]
+    },
+    {
+      "name": "image-viewer",
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://github.com/linuxdeepin/deepin-image-viewer",
+          "branch": "master"
+        },
+        {
+          "type": "script",
+          "commands": [
+            "sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' viewer/viewer.pro",
+            "sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' qimage-plugins/freeimage/freeimage.pro",
+            "qmake PREFIX=/app"
+          ],
+          "dest-filename": "configure"
+        }
+      ]
+    }
+  ]
 }

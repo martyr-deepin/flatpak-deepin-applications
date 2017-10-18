@@ -23,6 +23,7 @@
     "--own-name=org.mpris.MediaPlayer2.DeepinMusic",
     "--own-name=com.deepin.SingleInstance.deepinmusic",
     "--talk-name=org.freedesktop.Notifications",
+    "--talk-name=org.freedesktop.FileManager1",
     "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
   ],
   "modules": [

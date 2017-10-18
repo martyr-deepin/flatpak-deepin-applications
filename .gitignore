@@ -1,3 +1,4 @@
 .flatpak-builder
-music/
+bundle
 repo/
+app/

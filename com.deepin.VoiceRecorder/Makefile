@@ -9,7 +9,7 @@ build: $(MANIFEST)
 	$(FLATPAK_BUILDER) \
 		$(BUILDER_OPTIONS) \
 		--repo=$(TARGET_REPO) \
-		voicerecorder \
+		app \
 		$(MANIFEST)
 
 bundle:
