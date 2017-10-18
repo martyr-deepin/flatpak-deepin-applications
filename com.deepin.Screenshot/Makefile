@@ -16,4 +16,4 @@ bundle:
 
 
 clean:
-	rm -rf app repo
+	rm -rf app repo bundle
