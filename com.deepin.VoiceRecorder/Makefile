@@ -16,4 +16,4 @@ bundle:
 	flatpak build-bundle ./repo bundle com.deepin.VoiceRecorder master
 
 clean:
-	rm -rf voicerecorder repo
+	rm -rf app repo

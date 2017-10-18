@@ -16,4 +16,4 @@ bundle:
 
 
 clean:
-	rm -rf screenshot repo
+	rm -rf app repo

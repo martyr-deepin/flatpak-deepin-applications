@@ -14,6 +14,5 @@ build: $(MANIFEST)
 bundle:
 	 flatpak build-bundle ./repo bundle com.deepin.ScreenRecorder master
 
-
 clean:
-	rm -rf screenrecorder repo
+	rm -rf app repo

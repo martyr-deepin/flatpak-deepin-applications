@@ -16,4 +16,4 @@ bundle:
 	flatpak build-bundle ./repo bundle com.deepin.Movie master
 
 clean:
-	rm -rf deepin-movie repo
+	rm -rf app repo
