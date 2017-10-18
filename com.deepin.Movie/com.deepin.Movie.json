@@ -26,12 +26,56 @@
           "url": "https://cr.deepin.io/deepin-movie-reborn",
           "branch": "master"
         },
-	{
-	  "type": "patch",
-	  "path": "0001-fix-cmake-add-libraries-links.patch"
-	}
+        {
+          "type": "patch",
+          "path": "0001-fix-cmake-add-libraries-links.patch"
+        }
       ],
       "modules": [
+        {
+          "name": "libdvdnav",
+          "sources": [
+            {
+              "type": "git",
+              "url": "https://code.videolan.org/videolan/libdvdnav.git",
+              "branch": "master"
+            },
+            {
+              "type": "script",
+              "commands": [
+                "autoreconf -i"
+              ]
+            }
+          ],
+          "modules": [
+            {
+              "name": "libdvdcss",
+              "sources": [
+                {
+                  "type": "archive",
+                  "url": "https://download.videolan.org/pub/libdvdcss/1.4.0/libdvdcss-1.4.0.tar.bz2",
+                  "sha256": "2089375984800df29a4817b37f3123c1706723342d6dab4d0a8b75c25c2c845a"
+                }
+              ]
+            },
+            {
+              "name": "libdvdread",
+              "sources": [
+                {
+                  "type": "git",
+                  "url": "https://code.videolan.org/videolan/libdvdread.git",
+                  "branch": "master"
+                },
+                {
+                  "type": "script",
+                  "commands": [
+                    "autoreconf -i"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         {
           "name": "libmpv",
           "cleanup": [
@@ -62,20 +106,21 @@
           "modules": [
             "org.ffmpeg.FFmpeg.json",
             "org.luajit.Luajit.json",
-	    { "name": "ffmpegthumbnailer",
-	      "cmake": true,
-	      "config-opts": [
-		      "-DCMAKE_INSTALL_LIBDIR=lib",
-		      "-DENABLE_THUMBNAILER=ON"
-	      ],
-	      "sources": [
-		      {
-			      "type": "archive",
-			      "url": "https://github.com/dirkvdb/ffmpegthumbnailer/archive/2.2.0.tar.gz",
-			      "sha256": "8bc74755aa960531acdea8fa19ad7e1b7c806c28a068306a8c7150d278241a8f"
-		      }
-	      ]
-	    },
+            {
+              "name": "ffmpegthumbnailer",
+              "cmake": true,
+              "config-opts": [
+                "-DCMAKE_INSTALL_LIBDIR=lib",
+                "-DENABLE_THUMBNAILER=ON"
+              ],
+              "sources": [
+                {
+                  "type": "archive",
+                  "url": "https://github.com/dirkvdb/ffmpegthumbnailer/archive/2.2.0.tar.gz",
+                  "sha256": "8bc74755aa960531acdea8fa19ad7e1b7c806c28a068306a8c7150d278241a8f"
+                }
+              ]
+            },
             {
               "name": "libass",
               "config-opts": [
