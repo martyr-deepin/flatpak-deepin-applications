@@ -1,7 +1,7 @@
 {
   "app-id": "com.deepin.Screenshot",
   "runtime": "com.deepin.Platform",
-  "runtime-version": "15.5",
+  "runtime-version": "15.5.2",
   "sdk": "com.deepin.Sdk",
   "command": "deepin-screenshot",
   "separate-locales": false,
