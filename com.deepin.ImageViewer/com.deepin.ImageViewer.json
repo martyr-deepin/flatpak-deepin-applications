@@ -18,6 +18,7 @@
     "--device=dri",
     "--filesystem=home",
     "--talk-name=org.freedesktop.FileManager1",
+    "--talk-name=com.deepin.wm",
     "--own-name=com.deepin.DeepinImageViewer"
   ],
   "modules": [
@@ -179,7 +180,7 @@
           "commands": [
             "sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' viewer/viewer.pro",
             "sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' qimage-plugins/freeimage/freeimage.pro",
-            "qmake PREFIX=/app"
+            "qmake PREFIX=/app DEFINES+=FLATPAK_SUPPORT"
           ],
           "dest-filename": "configure"
         }
