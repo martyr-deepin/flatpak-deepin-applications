@@ -1,13 +1,4 @@
 #!/bin/sh
 flatpak install --system --bundle /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/bundle
 rm /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/bundle
-flatpak run -v --command=fc-cache com.deepin.Movie -v
-for f in `ls -d /home/*/`;
-do
-	mkdir -p $f/.var/app/com.deepin.Movie/cache/;
-	USER=`echo $f|cut -d '/' -f 3`;
-	cp -rf /root/.var/app/com.deepin.Movie/cache/fontconfig/  $f.var/app/com.deepin.Movie/cache/
-	chown -R $USER:$USER $f/.var/
-done
-
 exit 0
