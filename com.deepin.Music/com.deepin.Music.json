@@ -24,6 +24,7 @@
     "--own-name=com.deepin.SingleInstance.deepinmusic",
     "--talk-name=org.freedesktop.Notifications",
     "--talk-name=org.freedesktop.FileManager1",
+    "--talk-name=com.deepin.filemanager.filedialog",
     "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
   ],
   "modules": [
@@ -82,7 +83,7 @@
           "type": "script",
           "commands": [
                 "sed -i 's@\\[QT_INSTALL_LIBS\\]@{PREFIX}/lib@' libdmusic/libdmusic.pro",
-                "qmake PREFIX=/app"
+                "qmake PREFIX=/app DEFINES+=FLATPAK_SUPPORT"
             ],
           "dest-filename": "configure"
         }
