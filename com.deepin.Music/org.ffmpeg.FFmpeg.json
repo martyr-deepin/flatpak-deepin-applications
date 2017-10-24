@@ -27,7 +27,7 @@
   ],
   "sources": [{
     "type": "archive",
-    "url": "https://ffmpeg.org/releases/ffmpeg-3.3.2.tar.xz",
-    "sha256": "1998de1ab32616cbf2ff86efc3f1f26e76805ec5dc51e24c041c79edd8262785"
+    "url": "https://ffmpeg.org/releases/ffmpeg-3.4.tar.xz",
+    "sha256": "aeee06e4d8b18d852c61ebbfe5e1bb7014b1e118e8728c1c2115f91e51bffbef"
   }]
 }
