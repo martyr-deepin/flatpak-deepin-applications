@@ -4,7 +4,6 @@
   "sdk": "com.deepin.Sdk",
   "runtime": "com.deepin.Platform",
   "runtime-version": "15.5.2",
-  "sdk": "com.deepin.Sdk",
   "command": "deepin-movie",
   "rename-icon": "deepin-movie",
   "rename-desktop-file": "deepin-movie.desktop",
@@ -14,7 +13,8 @@
     "--socket=wayland",
     "--device=dri",
     "--share=network",
-    "--socket=pulseaudio"
+    "--socket=pulseaudio",
+    "--own-name=com.deepin.SingleInstance.deepinmovie"
   ],
   "modules": [
     {
