@@ -14,6 +14,7 @@
     "--device=dri",
     "--share=network",
     "--socket=pulseaudio",
+    "--filesystem=home",
     "--own-name=com.deepin.SingleInstance.deepinmovie"
   ],
   "modules": [
