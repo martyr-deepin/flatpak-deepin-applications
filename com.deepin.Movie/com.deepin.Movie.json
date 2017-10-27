@@ -15,7 +15,8 @@
     "--share=network",
     "--socket=pulseaudio",
     "--filesystem=home",
-    "--own-name=com.deepin.SingleInstance.deepinmovie"
+    "--own-name=com.deepin.SingleInstance.deepinmovie",
+    "--env=SANDBOX=flatpak"
   ],
   "modules": [
     {
@@ -26,10 +27,6 @@
           "type": "git",
           "url": "https://cr.deepin.io/deepin-movie-reborn",
           "branch": "master"
-        },
-        {
-          "type": "patch",
-          "path": "0001-fix-cmake-add-libraries-links.patch"
         }
       ],
       "modules": [
