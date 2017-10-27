@@ -22,6 +22,7 @@
   ],
   "modules": [
     "org.ffmpeg.FFmpeg.json",
+    "org.gnome.byzanz.json",
     {
       "name": "dtkwm",
       "no-autogen": true,
