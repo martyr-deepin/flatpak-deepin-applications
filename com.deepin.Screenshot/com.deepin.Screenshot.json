@@ -31,8 +31,9 @@
         {
           "type": "script",
           "commands": [
+            "sed -i 's@release, debug@debug, debug@g' deepin-screenshot.pro",
             "sed -i 's|/usr|/app|g' dbusservice/com.deepin.Screenshot.service",
-            "qmake PREFIX=/app"
+            "qmake PREFIX=/app CONFIG+=release CONFIG+=debug"
           ],
           "dest-filename": "configure"
         }
