@@ -25,43 +25,43 @@
     {
       "name": "gstreamer",
       "config-opts": [
-	"--disable-static",
+        "--disable-static",
         "--disable-gtk-doc"
       ],
       "sources": [
-	{
+        {
           "type": "archive",
-	  "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.12.3.tar.xz",
-	  "sha256": "d388f492440897f02b01eebb033ca2d41078a3d85c0eddc030cdea5a337a216e"
-	}
+          "url": "https://gstreamer.freedesktop.org/src/gstreamer/gstreamer-1.12.3.tar.xz",
+          "sha256": "d388f492440897f02b01eebb033ca2d41078a3d85c0eddc030cdea5a337a216e"
+        }
       ]
     },
     {
       "name": "gst-plugins-base",
       "config-opts": [
-	"--disable-static",
+        "--disable-static",
         "--disable-gtk-doc"
       ],
       "sources": [
-	{
+        {
           "type": "archive",
-	  "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.12.3.tar.xz",
-	  "sha256": "d3d37b8489d37fa0018973d850bd2067b98af335fef2fa543ee7d40359e3cea5"
-	}
+          "url": "https://gstreamer.freedesktop.org/src/gst-plugins-base/gst-plugins-base-1.12.3.tar.xz",
+          "sha256": "d3d37b8489d37fa0018973d850bd2067b98af335fef2fa543ee7d40359e3cea5"
+        }
       ]
     },
     {
       "name": "gst-plugins-good",
       "config-opts": [
-	"--disable-static",
+        "--disable-static",
         "--disable-gtk-doc"
       ],
       "sources": [
-	{
+        {
           "type": "archive",
-	  "url": "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.12.3.tar.xz",
-	  "sha256": "13e7f479296891fef5a686438f20ba7d534680becf2269ecc5ee24aa83b45f03"
-	}
+          "url": "https://gstreamer.freedesktop.org/src/gst-plugins-good/gst-plugins-good-1.12.3.tar.xz",
+          "sha256": "13e7f479296891fef5a686438f20ba7d534680becf2269ecc5ee24aa83b45f03"
+        }
       ]
     },
     {
