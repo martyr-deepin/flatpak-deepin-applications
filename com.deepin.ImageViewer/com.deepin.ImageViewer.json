@@ -18,7 +18,7 @@
     "--device=dri",
     "--filesystem=home",
     "--talk-name=org.freedesktop.FileManager1",
-    "--talk-name=com.deepin.wm",
+    "--talk-name=com.deepin.daemon.Appearance",
     "--own-name=com.deepin.DeepinImageViewer"
   ],
   "modules": [
