@@ -18,6 +18,7 @@
     "--share=network",
     "--device=dri",
     "--filesystem=home",
+    "--talk-name=com.deepin.dde.WarningDialog",
     "--own-name=com.deepin.SingleInstance.deepin-screen-recorder"
   ],
   "modules": [
@@ -54,6 +55,7 @@
           "type": "script",
           "commands": [
             "sed -i 's|/usr|/app|g' deepin-screen-recorder.pro",
+            "sed -i 's|/usr|/app|g' com.deepin.ScreenRecorder.service",
             "qmake PREFIX=/app"
           ],
           "dest-filename": "configure"
