@@ -3,7 +3,7 @@ TARGET_REPO = repo
 FLATPAK_BUILDER = $(shell which flatpak-builder)
 MANIFEST = com.deepin.Picker.json
 
-all: build
+all: build bundle
 
 build: $(MANIFEST)
 	$(FLATPAK_BUILDER) \
@@ -11,3 +11,8 @@ build: $(MANIFEST)
 		--repo=$(TARGET_REPO) \
 		app \
 		$(MANIFEST)
+bundle:
+	flatpak build-bundle ./repo bundle com.deepin.Picker master
+
+clean:
+	rm -rf app repo bundle
