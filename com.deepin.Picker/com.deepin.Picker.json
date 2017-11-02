@@ -1,0 +1,41 @@
+{
+  "app-id": "com.deepin.Picker",
+  "runtime": "com.deepin.Platform",
+  "runtime-version": "15.5.2",
+  "sdk": "com.deepin.Sdk",
+  "command": "deepin-picker",
+  "separate-locales": false,
+  "branch": "master",
+  "tags": [
+    "proprietary"
+  ],
+  "rename-desktop-file": "deepin-picker.desktop",
+  "rename-icon": "deepin-picker",
+  "finish-args": [
+    "--share=ipc",
+    "--socket=x11",
+    "--device=dri",
+    "--filesystem=home"
+  ],
+  "modules": [
+    {
+      "name": "deepin-picker",
+      "no-autogen": true,
+      "sources": [
+        {
+          "type": "git",
+          "url": "https://cr.deepin.io/deepin-picker",
+          "branch": "master"
+        },
+        {
+          "type": "script",
+          "commands": [
+            "sed -i 's|/usr|/app|g' deepin-picker.pro",
+            "qmake PREFIX=/app"
+          ],
+          "dest-filename": "configure"
+        }
+      ]
+    }
+  ]
+}
