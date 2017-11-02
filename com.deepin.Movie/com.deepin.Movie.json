@@ -15,7 +15,6 @@
     "--share=network",
     "--socket=pulseaudio",
     "--filesystem=home",
-    "--filesystem=gvfs",
     "--filesystem=/media",
     "--own-name=com.deepin.SingleInstance.deepinmovie",
     "--env=SANDBOX=flatpak"
