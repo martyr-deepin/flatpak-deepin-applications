@@ -11,7 +11,7 @@
     "--share=ipc",
     "--socket=x11",
     "--socket=wayland",
-    "--device=dri",
+    "--device=all",
     "--share=network",
     "--socket=pulseaudio",
     "--filesystem=home",
@@ -84,7 +84,7 @@
           "build-commands": [
             "rm -f /app/lib/libluajit-*.a",
             "ln -sf /app/lib/libluajit-5.1.so.2 /app/lib/libluajit-5.1.so",
-            "python2 waf configure --prefix=/app --enable-libmpv-shared --enable-encoding",
+            "python2 waf configure --prefix=/app --enable-libmpv-shared --enable-encoding --enable-dvdnav --enable-dvdread",
             "python2 waf build",
             "python2 waf install"
           ],
