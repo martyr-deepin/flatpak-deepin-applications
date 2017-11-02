@@ -16,6 +16,7 @@
     "--socket=pulseaudio",
     "--filesystem=home",
     "--filesystem=/media",
+    "--talk-name=org.freedesktop.ScreenSaver",
     "--own-name=com.deepin.SingleInstance.deepinmovie",
     "--env=SANDBOX=flatpak"
   ],
