@@ -28,6 +28,10 @@
           "branch": "master"
         },
         {
+          "type": "patch",
+          "path": "0001-fix-flatpak_icon_workaround.patch"
+        },
+        {
           "type": "script",
           "commands": [
             "sed -i 's|/usr|/app|g' deepin-picker.pro",

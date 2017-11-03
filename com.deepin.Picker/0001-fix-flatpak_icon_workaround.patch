@@ -1,0 +1,26 @@
+From 9104f1cd6a3865a7f94f02e174ca910f65c8a017 Mon Sep 17 00:00:00 2001
+From: Iceyer <me@iceyer.net>
+Date: Fri, 3 Nov 2017 11:44:30 +0800
+Subject: [PATCH] fix: flatpak_icon_workaround
+
+Change-Id: Id482660513dcf3644bec2a258919e0353ab380b0
+---
+ src/clipboard.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/clipboard.cpp b/src/clipboard.cpp
+index c01dab8..aa0dffb 100644
+--- a/src/clipboard.cpp
++++ b/src/clipboard.cpp
+@@ -74,7 +74,7 @@ void Clipboard::copyToClipboard(QColor color, QString colorType)
+     notifyDBus->Notify(
+         QCoreApplication::applicationName(),
+         0,
+-        "deepin-picker",
++        "com.deepin.Picker",
+         "",
+         QString(tr("Copy color %1 to clipboard")).arg(colorString), // body
+         actions,
+-- 
+2.13.3
+
