@@ -17,6 +17,7 @@
     "--share=network",
     "--device=dri",
     "--filesystem=home",
+    "--filesystem=/media",
     "--own-name=com.deepin.Screenshot"
   ],
   "modules": [

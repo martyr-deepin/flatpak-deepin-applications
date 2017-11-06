@@ -19,6 +19,7 @@
     "--device=dri",
     "--filesystem=host",
     "--filesystem=home",
+    "--filesystem=/media",
     "--filesystem=~/.config/dconf:rw",
     "--own-name=org.mpris.MediaPlayer2.DeepinMusic",
     "--own-name=com.deepin.SingleInstance.deepinmusic",

@@ -17,6 +17,7 @@
     "--share=network",
     "--device=dri",
     "--filesystem=home",
+    "--filesystem=/media",
     "--talk-name=org.freedesktop.FileManager1",
     "--talk-name=com.deepin.daemon.Appearance",
     "--own-name=com.deepin.DeepinImageViewer"
