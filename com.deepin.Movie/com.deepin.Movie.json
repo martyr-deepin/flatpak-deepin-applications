@@ -28,7 +28,7 @@
         {
           "type": "git",
           "url": "https://cr.deepin.io/deepin-movie-reborn",
-          "branch": "master"
+          "branch": "BUILDVER"
         }
       ],
       "modules": [

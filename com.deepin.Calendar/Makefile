@@ -5,7 +5,9 @@ MANIFEST = com.deepin.Calendar.json
 
 all: build bundle
 
+
 build: $(MANIFEST)
+	sed -i 's/BUILDVER/master/g' $(MANIFEST)
 	$(FLATPAK_BUILDER) \
 		$(BUILDER_OPTIONS) \
 		--repo=$(TARGET_REPO) \

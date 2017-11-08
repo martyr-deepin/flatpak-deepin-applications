@@ -29,7 +29,7 @@
         {
           "type": "git",
           "url": "https://github.com/linuxdeepin/dde-calendar",
-          "branch": "master"
+          "branch": "BUILDVER"
         },
         {
           "type": "script",

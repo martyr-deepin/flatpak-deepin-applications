@@ -25,31 +25,13 @@
     "org.ffmpeg.FFmpeg.json",
     "org.gnome.byzanz.json",
     {
-      "name": "dtkwm",
-      "no-autogen": true,
-      "sources": [
-        {
-          "type": "git",
-          "url": "https://cr.deepin.io/dtkwm",
-          "branch": "master"
-        },
-        {
-          "type": "script",
-          "commands": [
-            "qmake PREFIX=/app"
-          ],
-          "dest-filename": "configure"
-        }
-      ]
-    },
-    {
       "name": "deepin-screen-recorder",
       "no-autogen": true,
       "sources": [
         {
           "type": "git",
           "url": "https://cr.deepin.io/deepin-screen-recorder",
-          "branch": "master"
+          "branch": "BUILDVER"
         },
         {
           "type": "script",

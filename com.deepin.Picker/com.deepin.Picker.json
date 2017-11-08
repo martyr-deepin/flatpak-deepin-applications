@@ -25,7 +25,7 @@
         {
           "type": "git",
           "url": "https://cr.deepin.io/deepin-picker",
-          "branch": "master"
+          "branch": "BUILDVER"
         },
         {
           "type": "patch",

@@ -71,7 +71,7 @@
         {
           "type": "git",
           "url": "https://cr.deepin.io/deepin-voice-recorder",
-          "branch": "master"
+          "branch": "BUILDVER"
         },
         {
           "type": "script",

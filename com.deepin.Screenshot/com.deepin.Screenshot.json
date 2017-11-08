@@ -27,7 +27,7 @@
         {
           "type": "git",
           "url": "https://github.com/linuxdeepin/deepin-screenshot",
-          "branch": "master"
+          "branch": "BUILDVER"
         },
         {
           "type": "script",

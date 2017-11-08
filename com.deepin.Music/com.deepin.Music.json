@@ -105,7 +105,7 @@
         {
           "type": "git",
           "url": "https://cr.deepin.io/deepin-music",
-          "branch": "master"
+          "branch": "BUILDVER"
         },
         {
           "type": "script",
