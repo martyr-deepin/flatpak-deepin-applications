@@ -15,6 +15,7 @@
     "--share=ipc",
     "--socket=x11",
     "--device=dri",
+    "--talk-name=com.deepin.dde.WarningDialog",
     "--filesystem=home"
   ],
   "modules": [
