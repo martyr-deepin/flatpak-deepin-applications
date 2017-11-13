@@ -17,7 +17,9 @@
     "--filesystem=home",
     "--filesystem=/media",
     "--talk-name=org.freedesktop.ScreenSaver",
+    "--talk-name=com.deepin.movie",
     "--own-name=com.deepin.SingleInstance.deepinmovie",
+    "--own-name=com.deepin.movie",
     "--env=SANDBOX=flatpak"
   ],
   "modules": [
