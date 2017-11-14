@@ -1,5 +1,7 @@
 #!/bin/sh
 if flatpak info --system  com.deepin.Screenshot/x86_64/master >/dev/null 2>&1; then
-	flatpak uninstall --system com.deepin.Screenshot/x86_64/master
+	if [ "$1" = 'remove' ] || [ "$1" = 'purge' ];then
+		flatpak uninstall --system com.deepin.Screenshot/x86_64/master
+	fi
 fi
 exit 0
