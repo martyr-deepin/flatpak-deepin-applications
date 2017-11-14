@@ -17,4 +17,4 @@ bundle:
 	flatpak build-bundle ./repo bundle com.deepin.Calendar master
 
 clean:
-	rm -rf app repo bundle
+	rm -rf app repo bundle .flatpak-builder
