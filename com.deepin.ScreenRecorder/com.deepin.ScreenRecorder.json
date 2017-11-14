@@ -22,13 +22,11 @@
     "--own-name=com.deepin.SingleInstance.deepin-screen-recorder"
   ],
   "modules": [
-    "org.ffmpeg.FFmpeg.json",
     "org.gnome.byzanz.json",
     {
       "name": "deepin-screen-recorder",
       "no-autogen": true,
-      "sources": [
-        {
+      "sources": [{
           "type": "git",
           "url": "https://cr.deepin.io/deepin-screen-recorder",
           "branch": "BUILDVER"
