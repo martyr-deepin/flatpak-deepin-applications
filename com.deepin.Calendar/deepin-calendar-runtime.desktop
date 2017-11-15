@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Deepin Calendar Flatpak
+Name[zh_CN]=深度日历
+Comment=Deepin Calendar Flatpak
+Comment[zh_CN]=深度日历
+Exec=flatpak run --command=dpreload com.deepin.Calendar
+Terminal=false
+Type=Application
+OnlyShowIn=Deepin
