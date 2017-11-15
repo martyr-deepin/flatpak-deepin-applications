@@ -18,6 +18,7 @@
     "--filesystem=/media",
     "--talk-name=org.freedesktop.ScreenSaver",
     "--talk-name=com.deepin.movie",
+    "--talk-name=com.deepin.dman",
     "--own-name=com.deepin.SingleInstance.deepinmovie",
     "--own-name=com.deepin.movie",
     "--env=SANDBOX=flatpak"
@@ -26,6 +27,7 @@
     {
       "name": "deepin-movie",
       "cmake": true,
+      "config-opts": ["-DDTK_DMAN_PORTAL=on", "-DCMAKE_BUILD_TYPE=Release"],
       "sources": [
         {
           "type": "git",
