@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=Calculator;
+Comment=Calculator
+Exec=flatpak run --command=dpreload com.deepin.Calculator
+Name=Deepin Calculator
+StartupNotify=true
+TryExec=deepin-calculator
+Type=Application
+
+# Translations
+Name[zh_CN]=深度计算器
+Comment[zh_CN]=计算工具

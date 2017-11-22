@@ -1,42 +1,41 @@
 {
-  "app-id": "com.deepin.Calendar",
+  "app-id": "com.deepin.Calculator",
   "runtime": "com.deepin.Platform",
   "runtime-version": "15.5.2",
   "sdk": "com.deepin.Sdk",
-  "command": "dde-calendar",
+  "command": "deepin-calculator",
   "separate-locales": false,
   "branch": "master",
   "tags": [
     "proprietary"
   ],
-  "rename-desktop-file": "dde-calendar.desktop",
-  "rename-icon": "dde-calendar",
+  "rename-desktop-file": "deepin-calculator.desktop",
+  "rename-icon": "deepin-calculator",
   "finish-args": [
     "--share=ipc",
     "--socket=x11",
     "--socket=pulseaudio",
     "--share=network",
     "--device=dri",
-    "--talk-name=com.deepin.api.LunarCalendar",
-    "--own-name=com.deepin.Calendar",
-    "--own-name=com.deepin.SingleInstance.dde-calendar"
+    "--own-name=com.deepin.Calculator",
+    "--own-name=com.deepin.SingleInstance.deepin-calculator"
   ],
   "modules": [
     {
-      "name": "dde-calendar",
+      "name": "deepin-calculator",
       "no-autogen": true,
       "sources": [
         {
           "type": "git",
-          "url": "https://github.com/linuxdeepin/dde-calendar",
+          "url": "https://github.com/linuxdeepin/deepin-calculator",
           "branch": "master"
         },
         {
           "type": "script",
           "commands": [
-            "sed -i 's|/usr|/app|g' dde-calendar.pro",
-            "sed -i 's|/usr|/app|g' com.deepin.Calendar.service",
-            "sed -i 's|Exec=.*|Exec=/app/bin/dde-calendar|g' dde-calendar.desktop",
+            "sed -i 's|/usr|/app|g' deepin-calculator.pro",
+            "sed -i 's|/usr|/app|g' com.deepin.Calculator.service",
+            "sed -i 's|Exec=.*|Exec=/app/bin/deepin-calculator|g' deepin-calculator.desktop",
             "qmake PREFIX=/app"
           ],
           "dest-filename": "configure"
