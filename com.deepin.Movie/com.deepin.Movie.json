@@ -16,6 +16,7 @@
     "--socket=pulseaudio",
     "--filesystem=home",
     "--filesystem=/media",
+    "--filesystem=xdg-run/gvfs",
     "--talk-name=org.freedesktop.ScreenSaver",
     "--talk-name=com.deepin.movie",
     "--talk-name=com.deepin.dman",
