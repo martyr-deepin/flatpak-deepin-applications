@@ -17,6 +17,7 @@
     "--socket=pulseaudio",
     "--share=network",
     "--device=dri",
+    "--filesystem=home",
     "--own-name=com.deepin.Calculator",
     "--own-name=com.deepin.SingleInstance.deepin-calculator"
   ],
