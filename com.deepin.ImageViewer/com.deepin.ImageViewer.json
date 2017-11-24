@@ -20,7 +20,7 @@
     "--filesystem=/media",
     "--talk-name=org.freedesktop.FileManager1",
     "--talk-name=com.deepin.daemon.Appearance",
-    "--own-name=com.deepin.DeepinImageViewer"
+    "--own-name=com.deepin.ImageViewer"
   ],
   "modules": [
     {
