@@ -17,6 +17,7 @@
     "--socket=pulseaudio",
     "--share=network",
     "--device=dri",
+    "--filesystem=home",
     "--talk-name=com.deepin.api.LunarCalendar",
     "--own-name=com.deepin.Calendar",
     "--own-name=com.deepin.SingleInstance.dde-calendar"
