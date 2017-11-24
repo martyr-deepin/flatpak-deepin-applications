@@ -174,13 +174,14 @@
         {
           "type": "git",
           "url": "https://github.com/linuxdeepin/deepin-image-viewer",
-          "branch": "BUILDVER"
+          "branch": "master"
         },
         {
           "type": "script",
           "commands": [
             "sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' viewer/viewer.pro",
             "sed -i 's|-lfreeimage|-L/app/lib -lfreeimage|g' qimage-plugins/freeimage/freeimage.pro",
+            "sed -i 's/usr/app/g' viewer/com.deepin.ImageViewer.service",
             "qmake PREFIX=/app DEFINES+=FLATPAK_SUPPORT"
           ],
           "dest-filename": "configure"
