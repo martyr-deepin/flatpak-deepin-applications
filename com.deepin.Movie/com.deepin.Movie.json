@@ -102,6 +102,10 @@
               "sha256": "341d8bf18b75c1f78d5b681480b5b7f5c8b87d97a0d4f53a5648ede9c219a49c"
             },
             {
+              "type": "patch",
+              "path": "b881881dbd38a1720a9f8401fd1baafdd0dfccc0.patch"
+            },
+            {
               "type": "file",
               "url": "https://waf.io/waf-1.9.8",
               "sha256": "167dc42bab6d5bd823b798af195420319cb5c9b571e00db7d83df2a0fe1f4dbf",
