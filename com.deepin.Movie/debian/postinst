@@ -1,9 +1,4 @@
 #!/bin/sh
 flatpak install --system --bundle /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/bundle
-cd /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/
-tar -zxf org.freedesktop.Platform.GL.default.tar.gz -C /var/lib/flatpak/runtime/
-tar -zxf org.freedesktop.Platform.VAAPI.Intel.tar.gz -C /var/lib/flatpak/runtime/
 rm /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/bundle
-rm /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/org.freedesktop.Platform.VAAPI.Intel.tar.gz
-rm /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/org.freedesktop.Platform.GL.default.tar.gz
 exit 0
