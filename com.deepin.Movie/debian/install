@@ -1,2 +1,4 @@
 bundle /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/
 pkg /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/
+org.freedesktop.Platform.GL.default.tar.gz /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/
+org.freedesktop.Platform.VAAPI.Intel.tar.gz /usr/share/deepin-flatpak/app/com.deepin.Movie/x86_64/master/
