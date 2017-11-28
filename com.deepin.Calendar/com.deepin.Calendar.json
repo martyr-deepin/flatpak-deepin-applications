@@ -37,7 +37,7 @@
           "commands": [
             "sed -i 's|/usr|/app|g' dde-calendar.pro",
             "sed -i 's|/usr|/app|g' com.deepin.Calendar.service",
-            "sed -i 's|Exec=.*|Exec=/app/bin/dde-calendar|g' dde-calendar.desktop",
+            "sed -i 's|Exec=.*|Exec=dde-calendar|g' dde-calendar.desktop",
             "qmake PREFIX=/app"
           ],
           "dest-filename": "configure"
