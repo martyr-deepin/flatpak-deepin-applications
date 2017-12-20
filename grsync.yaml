@@ -1,0 +1,40 @@
+---
+app-id: org.deepin.flatdeb.grsync
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: grsync
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: grsync
+    x-flatdeb-apt-packages:
+      - grsync
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: grsync/app.tar.xz
+        dest: '.'
+      - type: file
+        path: grsync/Makefile
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+cleanup-commands:
+  - rm -rf /app/etc
+rename-desktop-file: grsync.desktop
+copy-icon: false
+...

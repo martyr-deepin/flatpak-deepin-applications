@@ -1,0 +1,44 @@
+---
+app-id: org.deepin.flatdeb.screenruler
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: screenruler
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: screenruler
+    x-flatdeb-apt-packages:
+      - screenruler
+      - gir1.2-pango-1.0
+      - libyaml-0-2
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=RUBYLIB=/app/lib/ruby/vendor_ruby:/app/lib/x86_64-linux-gnu/ruby/vendor_ruby/2.3.0:/app/lib/ruby/2.3.0:/app/lib/x86_64-linux-gnu/ruby/2.3.0
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+cleanup-commands:
+  - rm /app/bin/screenruler
+  - sed -i 's|/usr/share/screenruler|/app/share/screenruler|g' /app/share/screenruler/screenruler.rb
+  - ln -sf ../share/screenruler/screenruler.rb /app/bin/screenruler
+  - install -Dm644 /usr/lib/x86_64-linux-gnu/libyaml-0.so.2.0.5 /app/lib/x86_64-linux-gnu/libyaml-0.so.2
+rename-desktop-file: screenruler.desktop
+copy-icon: false
+...

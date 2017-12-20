@@ -1,0 +1,31 @@
+---
+app-id: org.deepin.flatdeb.darktable
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: darktable
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: baka
+    x-flatdeb-apt-packages:
+      - darktable
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: darktable
+rename-desktop-file: darktable.desktop
+copy-icon: true
+...

@@ -1,0 +1,40 @@
+---
+app-id: org.deepin.flatdeb.emacs
+branch: 25.2
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: emacs-25.2
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: emacs
+    x-flatdeb-apt-packages:
+      - emacs25
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: emacs/Makefile
+      - type: file
+        path: emacs/app.tar.xz
+        dest: '.'
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+rename-icon: emacs
+rename-desktop-file: emacs.desktop
+copy-icon: true
+...

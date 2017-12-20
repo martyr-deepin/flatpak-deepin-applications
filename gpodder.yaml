@@ -1,0 +1,41 @@
+---
+app-id: org.deepin.flatdeb.gpodder
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: gpodder
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: gpodder
+    x-flatdeb-apt-packages:
+      - gpodder
+      - python-gtk2
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=PYTHONPATH=/app/lib/python2.7/dist-packages:/app/lib/python2.7/dist-packages/gtk-2.0
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --own-name=org.gpodder.*
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+cleanup-commands:
+  - echo '/app/lib/python2.7/dist-packages/gtk-2.0/' | tee /app/lib/python2.7/dist-packages/gtk-2.0-pysupport-compat.pth
+rename-desktop-file: gpodder.desktop
+copy-icon: false
+...

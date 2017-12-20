@@ -1,0 +1,31 @@
+---
+app-id: org.deepin.flatdeb.gwenview
+branch: master
+runtime: org.deepin.flatdeb.kf5.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.kf5.Sdk
+command: gwenview
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: gwenview
+    x-flatdeb-apt-packages:
+      - gwenview
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --env=QML2_IMPORT_PATH=/app/lib/x86_64-linux-gnu/qt5/qml
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: gwenview
+rename-desktop-file: org.kde.gwenview.desktop
+copy-icon: true
+...

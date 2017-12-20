@@ -1,0 +1,33 @@
+---
+app-id: org.deepin.flatdeb.cmd-markdown
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: cmd-markdown
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: cmd-markdown
+    x-flatdeb-apt-packages:
+      - cmd-markdown
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+    post-install:
+      - mkdir -p /app/bin
+      - ln -sf /app/share/cmd_markdown/cmd-markdown /app/bin/cmd-markdown
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: cmd-markdown
+rename-desktop-file: cmd-markdown.desktop
+copy-icon: true
+...

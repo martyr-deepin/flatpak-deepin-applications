@@ -1,0 +1,36 @@
+---
+app-id: org.deepin.flatdeb.gcolor2
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: gcolor2
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: gcolor2
+    x-flatdeb-apt-packages:
+      - gcolor2
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+rename-desktop-file: gcolor2.desktop
+copy-icon: false
+...

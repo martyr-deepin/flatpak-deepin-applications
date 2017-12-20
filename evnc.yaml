@@ -1,0 +1,27 @@
+---
+app-id: org.deepin.flatdeb.evnc
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: evnc
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: evnc
+    x-flatdeb-apt-packages:
+      - evnc
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --share=network
+rename-desktop-file: evnc.desktop
+copy-icon: false
+...

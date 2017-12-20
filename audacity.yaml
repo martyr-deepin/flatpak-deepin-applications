@@ -1,0 +1,31 @@
+---
+app-id: org.deepin.flatdeb.audacity
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: audacity
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: audacity
+    x-flatdeb-apt-packages:
+      - audacity
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: audacity
+rename-desktop-file: audacity.desktop
+copy-icon: true
+...

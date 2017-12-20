@@ -1,0 +1,29 @@
+---
+app-id: org.deepin.flatdeb.anydesk
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: anydesk
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: anydesk
+    x-flatdeb-apt-packages:
+      - anydesk
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-desktop-file: anydesk.desktop
+copy-icon: false
+...

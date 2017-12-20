@@ -1,0 +1,45 @@
+---
+app-id: org.deepin.flatdeb.eog
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: eog
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: eog
+    x-flatdeb-apt-packages:
+      - eog
+      - gnome-desktop3-data
+      - libgnome-desktop-3-12
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: eog/app.tar.xz
+        dest: '.'
+      - type: file
+        path: eog/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib:/app/lib/x86_64-linux-gnu
+  - --env=GI_TYPELIB_PATH=/app/lib/x86_64-linux-gnu/girepository-1.0
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --filesystem=host
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --own-name=org.gnome.eog
+  - --own-name=org.gnome.eog.*
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+rename-icon: eog
+rename-desktop-file: eog.desktop
+copy-icon: true
+...

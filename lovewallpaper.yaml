@@ -1,0 +1,33 @@
+---
+app-id: org.deepin.flatdeb.lovewallpaper
+branch: master
+runtime: org.deepin.flatdeb.kf5.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.kf5.Sdk
+command: love-wallpaper
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: lovewallpaper
+    x-flatdeb-apt-packages:
+      - lovewallpaper
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --env=PYTHONPATH=/app/lib/python2.7/dist-packages
+  - --env=QT_PLUGIN_PATH=/app/lib/x86_64-linux-gnu/qt4/plugins
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+cleanup-commands:
+  - sed -i 's|/usr/share|/app/share|g' /app/bin/love-wallpaper
+rename-desktop-file: love-wallpaper.desktop
+copy-icon: false
+...

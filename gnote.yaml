@@ -1,0 +1,37 @@
+---
+app-id: org.deepin.flatdeb.gnote
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: gnote
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: gnote
+    x-flatdeb-apt-packages:
+      - gnote
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --own-name=org.gnome.Gnote
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+rename-desktop-file: gnote.desktop
+copy-icon: false
+...

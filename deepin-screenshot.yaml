@@ -1,0 +1,32 @@
+---
+app-id: org.deepin.flatdeb.deepin-screenshot
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: deepin-screenshot
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: deepin-screenshot
+    x-flatdeb-apt-packages:
+      - deepin-screenshot
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --own-name=com.deepin.Screenshot
+  - --filesystem=home
+rename-icon: deepin-screenshot
+rename-desktop-file: deepin-screenshot.desktop
+copy-icon: true
+...

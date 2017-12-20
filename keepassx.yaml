@@ -1,0 +1,30 @@
+---
+app-id: org.deepin.flatdeb.keepassx
+branch: master
+runtime: org.deepin.flatdeb.kf5.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.kf5.Sdk
+command: keepassx
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: keepassx
+    x-flatdeb-apt-packages:
+      - keepassx
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: keepassx
+rename-desktop-file: keepassx.desktop
+copy-icon: true
+...

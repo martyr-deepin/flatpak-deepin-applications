@@ -1,0 +1,34 @@
+---
+app-id: org.deepin.flatdeb.gnome-calendar
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: gnome-calendar
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: gnome-calendar
+    x-flatdeb-apt-packages:
+      - gnome-calendar
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --own-name=org.gnome.Calendar
+  - --own-name=org.gnome.Calendar.*
+cleanup-commands:
+  - sed -i '/DBusActivatable=.*/d' /app/share/applications/org.gnome.Calendar.desktop
+rename-icon: org.gnome.Calendar
+rename-desktop-file: org.gnome.Calendar.desktop
+copy-icon: true
+...

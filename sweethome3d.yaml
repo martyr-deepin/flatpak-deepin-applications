@@ -1,0 +1,42 @@
+---
+app-id: org.deepin.flatdeb.sweethome3d
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: sweethome3d
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: sweethome3d
+    x-flatdeb-apt-packages:
+      - sweethome3d
+      - sweethome3d-furniture
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=JAVA_CMD=/app/lib/jvm/java-1.8.0-openjdk-amd64/bin/java
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+cleanup-commands:
+  - sed -i 's|/usr/|/app/|g' /app/share/sweethome3d/sweethome3d.sh
+  - find /app/share/java-wrappers -type f -exec sed -i 's|/usr/lib|/app/lib|g' {} \;
+  - find /app/share/java-wrappers -type f -exec sed -i 's|/usr/share|/app/share|g' {} \;
+  - ln -sf /app/share/sweethome3d/sweethome3d.sh /app/bin/sweethome3d
+rename-desktop-file: sweethome3d.desktop
+copy-icon: false
+...

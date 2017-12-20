@@ -1,0 +1,40 @@
+---
+app-id: org.deepin.flatdeb.haroopad
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: haroopad
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: haroopad
+    x-flatdeb-apt-packages:
+      - haroopad
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+cleanup-commands:
+  - sed -i 's|/usr/share|/app/share|g' "/app/bin/haroopad"
+  - sed -i -e 's/libudev.so.0/libudev.so.1/g' "/app/share/haroopad/haroopad"
+rename-icon: haroopad
+rename-desktop-file: Haroopad.desktop
+copy-icon: true
+...

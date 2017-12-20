@@ -1,0 +1,11 @@
+---
+apt_components:
+  - main
+  - contrib
+debootstrap_script: 'unstable'
+can_merge_usr: true
+include_packages:
+  - 'deepin-keyring'
+sources:
+  - apt_uri: 'http://pools.corp.deepin.com/deepin'
+...

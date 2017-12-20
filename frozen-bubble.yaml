@@ -1,0 +1,37 @@
+---
+app-id: org.deepin.flatdeb.frozen-bubble
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: frozen-bubble
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: frozen-bubble
+    x-flatdeb-apt-packages:
+      - frozen-bubble
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: frozen-bubble/Makefile
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=PERL5LIB=/app/share/perl5:/app/lib/x86_64-linux-gnu/perl5/5.26
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+rename-icon: frozen-bubble
+rename-desktop-file: frozen-bubble.desktop
+copy-icon: true
+...

@@ -1,0 +1,34 @@
+---
+app-id: org.deepin.flatdeb.deepin-calendar
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: dde-calendar
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: deepin-calendar
+    x-flatdeb-apt-packages:
+      - dde-calendar
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --talk-name=com.deepin.api.LunarCalendar
+  - --own-name=com.deepin.Calendar
+  - --own-name=com.deepin.SingleInstance.dde-calendar
+rename-icon: dde-calendar
+rename-desktop-file: dde-calendar.desktop
+copy-icon: true
+...

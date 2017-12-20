@@ -1,0 +1,27 @@
+---
+app-id: org.deepin.flatdeb.flareget
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: flareget
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: flareget
+    x-flatdeb-apt-packages:
+      - flareget
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --share=network
+rename-desktop-file: flareget.desktop
+copy-icon: false
+...

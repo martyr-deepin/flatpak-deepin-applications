@@ -1,0 +1,40 @@
+---
+app-id: org.deepin.flatdeb.iridium-browser
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: iridium-browser
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: iridium-browser
+    x-flatdeb-apt-packages:
+      - iridium-browser
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+cleanup-commands:
+  - echo "#!/bin/sh\n /app/lib/iridium-browser/iridium-browser --enable-pinch --no-sandbox" | tee /app/bin/iridium-browser
+  - echo +x /app/bin/iridium-browser
+rename-icon: iridium-browser
+rename-desktop-file: iridium-browser.desktop
+copy-icon: true
+...

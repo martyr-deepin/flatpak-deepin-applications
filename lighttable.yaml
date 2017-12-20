@@ -1,0 +1,29 @@
+---
+app-id: org.deepin.flatdeb.lighttable
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: lighttable
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: lighttable
+    x-flatdeb-apt-packages:
+      - lighttable
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: lighttable/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-desktop-file: lighttable.desktop
+copy-icon: false
+...

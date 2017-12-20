@@ -1,0 +1,33 @@
+---
+app-id: org.deepin.flatdeb.x-4kstogram
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: 4kstogram
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: 4kstogram
+    x-flatdeb-apt-packages:
+      - 4kstogram
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+cleanup-commands:
+  - mkdir -p /app/bin
+  - ln -sf /app/lib/4kstogram/4kstogram-bin /app/bin/4kstogram
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/4kstogram
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-desktop-file: 4kstogram.desktop
+copy-icon: false
+...

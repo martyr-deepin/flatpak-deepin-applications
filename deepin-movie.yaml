@@ -1,0 +1,31 @@
+---
+app-id: org.deepin.flatdeb.deepin-movie
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: deepin-movie
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: deepin-movie
+    x-flatdeb-apt-packages:
+      - deepin-movie
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: deepin-movie
+rename-desktop-file: deepin-movie.desktop
+copy-icon: true
+...

@@ -1,0 +1,40 @@
+---
+app-id: org.deepin.flatdeb.x-4kvideodownloader
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: 4kvideodownloader
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: 4kvideodownloader
+    x-flatdeb-apt-packages:
+      - 4kvideodownloader
+    x-flatdeb-apt-sources:
+      - apt_uri: 'http://pools.corp.deepin.com/deepin'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+          - contrib
+          - non-free
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+cleanup-commands:
+  - mkdir -p /app/bin
+  - ln -sf /app/lib/4kvideodownloader/4kvideodownloader-bin /app/bin/4kvideodownloader
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/4kvideodownloader
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-desktop-file: 4kvideodownloader.desktop
+copy-icon: false
+...

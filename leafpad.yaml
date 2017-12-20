@@ -1,0 +1,27 @@
+---
+app-id: org.deepin.flatdeb.leafpad
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: leafpad
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: leafpad
+    x-flatdeb-apt-packages:
+      - leafpad
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --share=network
+rename-desktop-file: leafpad.desktop
+copy-icon: false
+...

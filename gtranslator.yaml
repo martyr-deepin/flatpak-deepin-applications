@@ -1,0 +1,38 @@
+---
+app-id: org.deepin.flatdeb.gtranslator
+branch: master
+runtime: org.deepin.flatdeb.gnome.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.gnome.Sdk
+command: gtranslator
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: gtranslator
+    x-flatdeb-apt-packages:
+      - gtranslator
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/x86_64-linux-gnu/gtranslator
+  - --env=GI_TYPELIB_PATH=/app/lib/x86_64-linux-gnu/girepository-1.0
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --own-name=org.gnome.Gtranslator
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+rename-desktop-file: gtranslator.desktop
+copy-icon: false
+...

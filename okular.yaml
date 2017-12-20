@@ -1,0 +1,41 @@
+---
+app-id: org.deepin.flatdeb.okular
+branch: master
+runtime: org.deepin.flatdeb.kde4.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.kde4.Sdk
+command: okular
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: okular
+    x-flatdeb-apt-packages:
+      - okular
+      - okular-extra-backends
+      - ghostscript
+      - poppler-data
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --own-name=org.kde.*
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+rename-icon: okular
+rename-desktop-file: kde4/okular.desktop
+copy-icon: true
+...

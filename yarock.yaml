@@ -1,0 +1,30 @@
+---
+app-id: org.deepin.flatdeb.yarock
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: yarock
+writable-sdk: true
+appstream-compose: false
+modules:
+  - name: yarock
+    x-flatdeb-apt-packages:
+      - yarock
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+rename-icon: application-x-yarock
+rename-desktop-file: yarock.desktop
+copy-icon: true
+...
