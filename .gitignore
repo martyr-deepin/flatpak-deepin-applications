@@ -2,4 +2,5 @@
 bundle
 .vscode/
 *.tar.xz
+*.tar.*
 *.deb
