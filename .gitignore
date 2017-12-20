@@ -1,0 +1,5 @@
+.flatpak-builder
+bundle
+.vscode/
+*.tar.xz
+*.deb
