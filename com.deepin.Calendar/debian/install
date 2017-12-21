@@ -1,3 +1,2 @@
 bundle /usr/share/deepin-flatpak/app/com.deepin.Calendar/x86_64/master/
 pkg /usr/share/deepin-flatpak/app/com.deepin.Calendar/x86_64/master/
-deepin-calendar-runtime.desktop /etc/xdg/autostart/
