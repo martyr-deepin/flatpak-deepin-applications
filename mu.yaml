@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.mu
 branch: master
-runtime: org.deepin.flatdeb.kf5.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.kf5.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: mu
 writable-sdk: true
 appstream-compose: false
@@ -18,20 +18,15 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
-  - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib/x86_64-linux-gnu/gstreamer-1.0 
-  - --env=QT_PLUGIN_PATH=/app/lib/x86_64-linux-gnu/qt5/plugins
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --filesystem=home
 rename-icon: mu
 rename-desktop-file: mu.desktop
 copy-icon: true
