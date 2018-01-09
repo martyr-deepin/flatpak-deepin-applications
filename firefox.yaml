@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.firefox
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: firefox
 writable-sdk: true
 appstream-compose: false
@@ -19,18 +19,8 @@ modules:
         path: deb-buildapi/Makefile
 
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
-  - --share=ipc
-  - --socket=x11
-  - --socket=wayland
-  - --device=dri
-  - --share=network
-  - --socket=pulseaudio
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 rename-icon: firefox
 rename-desktop-file: firefox.desktop
 copy-icon: true
