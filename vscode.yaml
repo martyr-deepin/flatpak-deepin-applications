@@ -39,6 +39,7 @@ finish-args:
   - --device=dri
   - --share=network
   - --socket=pulseaudio
+  - --filesystem=home
 rename-icon: visual-studio-code
 rename-desktop-file: visual-studio-code.desktop
 copy-icon: true
