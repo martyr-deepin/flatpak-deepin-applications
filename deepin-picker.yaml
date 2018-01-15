@@ -24,6 +24,7 @@ finish-args:
   - --device=dri
   - --share=network
   - --socket=pulseaudio
+  - --filesystem=home
 rename-icon: deepin-picker
 rename-desktop-file: deepin-picker.desktop
 copy-icon: true
