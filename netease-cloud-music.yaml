@@ -25,6 +25,12 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --filesystem=home
+  - --filesystem=~/.config/dconf:ro
+  - --talk-name=ca.desrt.dconf
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.freedesktop.ScreenSaver.*
+  - --talk-name=org.freedesktop.PowerManagement.*
+  - --own-name=org.mpris.MediaPlayer2.netease-cloud-music
 rename-icon: netease-cloud-music
 rename-desktop-file: netease-cloud-music.desktop
 copy-icon: true
