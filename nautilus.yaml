@@ -29,6 +29,8 @@ finish-args:
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
+  - --filesystem=host
   - --talk-name=ca.desrt.dconf
   - --own-name=org.gnome.Nautilus
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
