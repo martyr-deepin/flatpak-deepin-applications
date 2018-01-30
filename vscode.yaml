@@ -14,7 +14,7 @@ modules:
     x-flatdeb-apt-sources:
       - apt_uri: 'http://pools.corp.deepin.com/deepin'
         apt_suite: 'unstable'
-        apt_componets:
+        apt_components:
           - main
           - contrib
       - apt_uri: '[trusted=yes] http://pools.corp.deepin.com/ppa/universe'

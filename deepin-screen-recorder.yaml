@@ -22,7 +22,7 @@ modules:
 cleanup-commands:
   - rm -rf /app/lib/deepin-notifications
 finish-args:
-  - --own-name=com.deepin.SingleInstance.deepin-screen-recorder
+  - --own-name=com.deepin.ScreenRecorder
   - --talk-name=org.freedesktop.Notifications
   - --share=ipc
   - --socket=x11

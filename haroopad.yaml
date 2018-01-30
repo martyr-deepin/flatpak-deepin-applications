@@ -11,6 +11,12 @@ modules:
   - name: haroopad
     x-flatdeb-apt-packages:
       - haroopad
+    x-flatdeb-apt-sources:
+      - apt_uri: 'http://pools.corp.deepin.com/deepin'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+          - non-free
     sources:
       - type: file
         path: deb-buildapi/configure
