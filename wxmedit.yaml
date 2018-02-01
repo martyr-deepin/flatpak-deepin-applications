@@ -17,6 +17,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/wxmedit.png /app/share/icons/hicolor/512x512/apps/wxmedit.png
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --share=ipc
@@ -31,5 +33,6 @@ finish-args:
   - --talk-name=ca.desrt.dconf
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 rename-desktop-file: wxmedit.desktop
-copy-icon: false
+rename-icon: wxmedit
+copy-icon: true
 ...
