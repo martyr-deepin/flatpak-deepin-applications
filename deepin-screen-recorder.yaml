@@ -24,6 +24,7 @@ cleanup-commands:
 finish-args:
   - --own-name=com.deepin.ScreenRecorder
   - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.dde.WarningDialog
   - --share=ipc
   - --socket=x11
   - --socket=wayland
