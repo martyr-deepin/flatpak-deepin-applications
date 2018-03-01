@@ -7,6 +7,7 @@ sdk: org.deepin.flatdeb.gnome.Sdk
 command: amule
 writable-sdk: true
 appstream-compose: false
+separate-locales: false
 modules:
   - name: amule
     x-flatdeb-apt-packages:
@@ -18,8 +19,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
-
 finish-args:
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --share=ipc
   - --socket=x11
