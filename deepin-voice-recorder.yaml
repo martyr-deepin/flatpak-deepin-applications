@@ -1,16 +1,16 @@
 ---
-app-id: org.deepin.flatdeb.deepin-music
+app-id: org.deepin.flatdeb.deepin-voice-recorder
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: deepin-music
+command: deepin-voice-recorder
 writable-sdk: true
 appstream-compose: false
 modules:
-  - name: deepin-music
+  - name: deepin-voice-recorder
     x-flatdeb-apt-packages:
-      - deepin-music
+      - deepin-voice-recorder
       - gstreamer1.0-plugins-base-apps
       - gstreamer1.0-pulseaudio
       - libqt5multimedia5-plugins
@@ -24,26 +24,25 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+
 finish-args:
-  - --own-name=org.mpris.MediaPlayer2.DeepinMusic
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --talk-name=org.freedesktop.Notifications
+  - --own-name=com.deepin.SingleInstance.deepin-voice-recorder
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=com.deepin.Manual.*
+  - --talk-name=com.deepin.dman
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --filesystem=xdg-run/dconf
-  - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-  - --talk-name=com.deepin.Manual.*
-  - --talk-name=com.deepin.dman
-  - --talk-name=org.freedesktop.FileManager1
-  - --talk-name=org.freedesktop.portal.Fcitx
-  - --talk-name=org.freedesktop.Notifications
-  - --talk-name=com.deepin.filemanager.filedialog
-  - --own-name=com.deepin.SingleInstance.deepinmusic
-  - --filesystem=/media
-rename-icon: deepin-music
-rename-desktop-file: deepin-music.desktop
+  - --filesystem=~/.config/dconf:ro
+  - --filesystem=xdg-run/dconf
+rename-icon: deepin-voice-recorder
+rename-desktop-file: deepin-voice-recorder.desktop
 copy-icon: true
 ...

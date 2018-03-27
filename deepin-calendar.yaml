@@ -4,6 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
+service: com.deepin.Calendar
 command: dde-calendar
 writable-sdk: true
 appstream-compose: false
@@ -28,6 +29,13 @@ finish-args:
   - --talk-name=com.deepin.api.LunarCalendar
   - --own-name=com.deepin.Calendar
   - --own-name=com.deepin.SingleInstance.dde-calendar
+  - --talk-name=com.deepin.Manual.*
+  - --talk-name=com.deepin.dman
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
+
 rename-icon: dde-calendar
 rename-desktop-file: dde-calendar.desktop
 copy-icon: true

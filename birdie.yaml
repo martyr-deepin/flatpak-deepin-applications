@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.birdie
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: birdie
 writable-sdk: true
 appstream-compose: false
@@ -11,6 +11,14 @@ modules:
   - name: birdie
     x-flatdeb-apt-packages:
       - birdie
+    x-flatdeb-apt-sources:
+      - apt_uri: 'http://pools.corp.deepin.com/deepin'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+          - contrib
+          - non-free
+
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -20,6 +28,7 @@ modules:
 
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --share=ipc
   - --socket=x11
   - --socket=wayland
@@ -36,6 +45,11 @@ finish-args:
   - --own-name=com.github.needle-and-thread.birdie
   - --own-name=com.github.needle-and-thread.birdie.*
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
+
 rename-desktop-file: birdie.desktop
 copy-icon: false
 ...

@@ -1,37 +1,38 @@
 ---
-app-id: org.deepin.flatdeb.darktable
+app-id: org.deepin.flatdeb.dupeguru
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: darktable
+command: dupeguru
 writable-sdk: true
 appstream-compose: false
+separate-locales: false
 modules:
-  - name: baka
+  - name: dupeguru
     x-flatdeb-apt-packages:
-      - darktable
+      - dupeguru
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
-
+    post-install:
+      - install -Dm644 /app/share/dupeguru/dgse_logo_128.png /app/share/icons/hicolor/128x128/apps/dupeguru.png
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
-  - --filesystem=xdg-run/dconf
-  - --filesystem=~/.config/dconf:ro
   - --talk-name=ca.desrt.dconf
-  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
@@ -40,7 +41,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: darktable
-rename-desktop-file: darktable.desktop
+rename-icon: dupeguru
+rename-desktop-file: dupeguru.desktop
 copy-icon: true
 ...

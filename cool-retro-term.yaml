@@ -1,38 +1,46 @@
 ---
-app-id: org.deepin.flatdeb.deepin-calculator
+app-id: org.deepin.flatdeb.cool-retro-term
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: deepin-calculator
+command: cool-retro-term
 writable-sdk: true
 appstream-compose: false
+separate-locales: false
 modules:
-  - name: deepin-calculator
+  - name: cool-retro-term
     x-flatdeb-apt-packages:
-      - deepin-calculator
+      - cool-retro-term
+      - qml-module-qtgraphicaleffects
+      - qml-module-qt-labs-folderlistmodel
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
-
 finish-args:
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --talk-name=com.deepin.Manual.*
-  - --talk-name=com.deepin.dman
+  - --talk-name=ca.desrt.dconf
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
-  - --own-name=com.deepin.SingleInstance.deepin-calculator
-rename-icon: deepin-calculator
-rename-desktop-file: deepin-calculator.desktop
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
+
+rename-icon: cool-retro-term
+rename-desktop-file: cool-retro-term.desktop
 copy-icon: true
 ...

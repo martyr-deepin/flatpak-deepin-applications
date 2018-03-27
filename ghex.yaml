@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.ghex
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: ghex
 writable-sdk: true
 appstream-compose: false
@@ -19,6 +19,7 @@ modules:
         path: deb-buildapi/Makefile
 
 finish-args:
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --share=ipc
   - --socket=x11
@@ -31,6 +32,14 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --talk-name=ca.desrt.dconf
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
+
 rename-desktop-file: ghex.desktop
 copy-icon: false
 ...

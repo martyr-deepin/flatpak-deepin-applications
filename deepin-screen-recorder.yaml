@@ -3,6 +3,7 @@ app-id: org.deepin.flatdeb.deepin-screen-recorder
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
+service: com.deepin.ScreenRecorder
 sdk: org.deepin.flatdeb.Base.Sdk
 command: deepin-screen-recorder
 writable-sdk: true
@@ -23,7 +24,6 @@ cleanup-commands:
   - rm -rf /app/lib/deepin-notifications
 finish-args:
   - --own-name=com.deepin.ScreenRecorder
-  - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.dde.WarningDialog
   - --share=ipc
   - --socket=x11
@@ -32,6 +32,12 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --filesystem=home
+  - --talk-name=com.deepin.Manual.*
+  - --talk-name=com.deepin.dman
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
 rename-icon: deepin-screen-recorder
 rename-desktop-file: deepin-screen-recorder.desktop
 copy-icon: true

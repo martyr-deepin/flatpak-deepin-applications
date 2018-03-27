@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.birdfont
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: birdfont
 writable-sdk: true
 appstream-compose: false

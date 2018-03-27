@@ -3,6 +3,7 @@ app-id: org.deepin.flatdeb.deepin-image-viewer
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
+service: com.deepin.ImageViewer
 sdk: org.deepin.flatdeb.Base.Sdk
 command: deepin-image-viewer
 writable-sdk: true
@@ -27,6 +28,15 @@ finish-args:
   - --socket=pulseaudio
   - --own-name=com.deepin.ImageViewer
   - --filesystem=home
+  - --talk-name=com.deepin.Manual.*
+  - --talk-name=com.deepin.dman
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --own-name=com.deepin.SingleInstance.deepin-image-viewer
+  - --talk-name=com.deepin.daemon.Appearance
+  - filesystem=/media
 rename-icon: deepin-image-viewer
 rename-desktop-file: deepin-image-viewer.desktop
 copy-icon: true

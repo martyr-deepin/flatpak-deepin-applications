@@ -3,6 +3,7 @@ app-id: org.deepin.flatdeb.deepin-screenshot
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
+service: com.deepin.Screenshot
 sdk: org.deepin.flatdeb.Base.Sdk
 command: deepin-screenshot
 writable-sdk: true
@@ -26,6 +27,12 @@ finish-args:
   - --socket=pulseaudio
   - --own-name=com.deepin.Screenshot
   - --filesystem=home
+  - --talk-name=com.deepin.Manual.*
+  - --talk-name=com.deepin.dman
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
 rename-icon: deepin-screenshot
 rename-desktop-file: deepin-screenshot.desktop
 copy-icon: true

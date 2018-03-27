@@ -1,16 +1,19 @@
 ---
 app-id: org.deepin.flatdeb.bluefish
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: bluefish
 writable-sdk: true
+separate-locales: false
 appstream-compose: false
 modules:
   - name: bluefish
     x-flatdeb-apt-packages:
       - bluefish
+      - bluefish-data
+      - bluefish-plugins
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -20,6 +23,7 @@ modules:
 
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --share=ipc
   - --socket=x11
   - --socket=wayland
@@ -27,8 +31,13 @@ finish-args:
   - --share=network
   - --socket=pulseaudio
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
   - --talk-name=ca.desrt.dconf
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 rename-icon: bluefish

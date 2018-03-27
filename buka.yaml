@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.buka
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: Buka
 writable-sdk: true
 appstream-compose: false
@@ -33,6 +33,12 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --talk-name=ca.desrt.dconf
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --filesystem=home
+
 rename-desktop-file: Buka.desktop
 rename-icon: Buka
 copy-icon: true
