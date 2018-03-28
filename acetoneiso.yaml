@@ -12,6 +12,7 @@ modules:
   - name: acetoneiso
     x-flatdeb-apt-packages:
       - acetoneiso
+      - fuseiso
     sources:
       - type: file
         path: deb-buildapi/configure

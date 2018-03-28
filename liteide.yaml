@@ -1,15 +1,13 @@
 ---
 app-id: org.deepin.flatdeb.liteide
 branch: master
-runtime: org.deepin.flatdeb.gnome.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.gnome.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: liteide
 writable-sdk: true
 appstream-compose: false
-build-options:
-  - no-debuginfo: true
-  - strip: false
+separate-locales: false
 modules:
   - name: liteide
     x-flatdeb-apt-packages:
@@ -20,19 +18,29 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/icons/liteide.png /app/share/icons/hicolor/48x48/apps/liteide.png
 finish-args:
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --talk-name=ca.desrt.dconf
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --filesystem=home
+
+rename-icon: liteide
 rename-desktop-file: liteide.desktop
-copy-icon: false
+copy-icon: true
 ...

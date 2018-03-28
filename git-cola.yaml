@@ -1,26 +1,29 @@
 ---
-app-id: org.deepin.flatdeb.flareget
+app-id: org.deepin.flatdeb.git-cola
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: flareget
+command: git-cola
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
 modules:
-  - name: flareget
+  - name: git-cola
     x-flatdeb-apt-packages:
-      - flareget
+      - git-cola
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/git-cola/icons/git-cola.svg /app/share/icons/hicolor/scalable/apps/git-cola.svg
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/flareget
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/git-core
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -37,10 +40,8 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-cleanup-commands:
-  - sed -i 's|Exec=.*|Exec=flareget|g' /app/share/applications/flareget.desktop
 
-rename-icon: flareget
-rename-desktop-file: flareget.desktop
+rename-icon: git-cola
+rename-desktop-file: git-cola.desktop
 copy-icon: true
 ...

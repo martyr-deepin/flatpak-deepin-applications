@@ -1,26 +1,28 @@
 ---
-app-id: org.deepin.flatdeb.flareget
+app-id: org.deepin.flatdeb.fritzing
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: flareget
+command: fritzing
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
 modules:
-  - name: flareget
+  - name: fritzing
     x-flatdeb-apt-packages:
-      - flareget
+      - fritzing
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/fritzing_icon.png  /app/share/icons/hicolor/256x256/apps/fritzing_icon.png
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/flareget
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -37,10 +39,8 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-cleanup-commands:
-  - sed -i 's|Exec=.*|Exec=flareget|g' /app/share/applications/flareget.desktop
 
-rename-icon: flareget
-rename-desktop-file: flareget.desktop
+rename-icon: fritzing_icon
+rename-desktop-file: fritzing.desktop
 copy-icon: true
 ...

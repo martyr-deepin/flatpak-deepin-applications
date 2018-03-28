@@ -1,17 +1,36 @@
 ---
-app-id: org.deepin.flatdeb.flareget
+app-id: org.deepin.flatdeb.gbyzanz
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: flareget
+command: gbyzanz
 writable-sdk: true
 appstream-compose: false
-separate-locales: false
 modules:
-  - name: flareget
+  - name: gbyzanz
     x-flatdeb-apt-packages:
-      - flareget
+      - gbyzanz
+      - qml-module-qtquick-controls
+      - qml-module-qtquick-layouts
+      - qml-module-qtquick-dialogs
+      - qml-module-qtquick-extras
+      - qml-module-qtquick-localstorage
+      - qml-module-qtquick-privatewidgets
+      - qml-module-qtquick-window2
+      - qml-module-qtquick-xmllistmodel
+      - qml-module-qt-labs-folderlistmodel
+    x-flatdeb-apt-sources:
+      - apt_uri: 'http://pools.corp.deepin.com/deepin'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+          - non-free
+          - contrib
+      - apt_uri: '[trusted=yes] http://10.0.12.149/flatpak-test'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -19,8 +38,7 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/flareget
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -37,10 +55,8 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-cleanup-commands:
-  - sed -i 's|Exec=.*|Exec=flareget|g' /app/share/applications/flareget.desktop
 
-rename-icon: flareget
-rename-desktop-file: flareget.desktop
+rename-icon: gbyzanz
+rename-desktop-file: gbyzanz.desktop
 copy-icon: true
 ...

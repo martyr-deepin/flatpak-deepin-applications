@@ -24,6 +24,7 @@ finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages:/app/lib/python2.7/dist-packages
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
@@ -39,6 +40,8 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
+cleanup-commands:
+  - echo '/app/lib/python2.7/dist-packages/gtk-2.0/' | tee /app/bin/eric
 
 rename-icon: eric
 rename-desktop-file: eric.desktop
