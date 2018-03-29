@@ -1,33 +1,26 @@
 ---
-app-id: org.deepin.flatdeb.git-cola
+app-id: org.deepin.flatdeb.texstudio
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: git-cola
+command: texstudio
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
 modules:
-  - name: git-cola
+  - name: texstudio
     x-flatdeb-apt-packages:
-      - git-cola
-      - curl
-      - libcurl4-openssl-dev
-      - libcurl3-gnutls
-      - libcurl3
+      - texstudio
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
-    post-install:
-      - install -Dm644 /app/share/git-cola/icons/git-cola.svg /app/share/icons/hicolor/scalable/apps/git-cola.svg
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/git-core
-  - --env=PYTHONPATH=/app/lib/python3/dist-packages
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -45,7 +38,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: git-cola
-rename-desktop-file: git-cola.desktop
+rename-icon: texstudio
+rename-desktop-file: texstudio.desktop
 copy-icon: true
 ...

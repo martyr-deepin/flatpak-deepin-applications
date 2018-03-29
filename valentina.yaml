@@ -1,21 +1,17 @@
 ---
-app-id: org.deepin.flatdeb.git-cola
+app-id: org.deepin.flatdeb.valentina
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: git-cola
+command: valentina
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
 modules:
-  - name: git-cola
+  - name: valentina
     x-flatdeb-apt-packages:
-      - git-cola
-      - curl
-      - libcurl4-openssl-dev
-      - libcurl3-gnutls
-      - libcurl3
+      - valentina
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -23,11 +19,10 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
     post-install:
-      - install -Dm644 /app/share/git-cola/icons/git-cola.svg /app/share/icons/hicolor/scalable/apps/git-cola.svg
+      sed -i 's|Icon=.*|Icon=valentina|g' /app/share/applications/valentina.desktop
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/git-core
-  - --env=PYTHONPATH=/app/lib/python3/dist-packages
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -44,8 +39,9 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
-rename-icon: git-cola
-rename-desktop-file: git-cola.desktop
+cleanup-commands:
+  - install -Dm644 /app/share/pixmaps/valentina.png /app/share/icons/hicolor/64x64/apps/valentina.png
+rename-icon: valentina
+rename-desktop-file: valentina.desktop
 copy-icon: true
 ...

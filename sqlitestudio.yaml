@@ -1,12 +1,13 @@
 ---
 app-id: org.deepin.flatdeb.sqlitestudio
 branch: master
-runtime: org.deepin.flatdeb.kf5.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.kf5.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: sqlitestudio
 writable-sdk: true
 appstream-compose: false
+separate-locales: false
 modules:
   - name: sqlitestudio
     x-flatdeb-apt-packages:
@@ -19,19 +20,26 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
+  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=QT_PLUGIN_PATH=/app/lib/x86_64-linux-gnu/qt5/plugins
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --talk-name=ca.desrt.dconf
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --filesystem=home
+
 rename-icon: sqlitestudio
 rename-desktop-file: sqlitestudio.desktop
 copy-icon: true
