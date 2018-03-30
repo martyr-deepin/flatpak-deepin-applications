@@ -27,6 +27,7 @@ modules:
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/git-core
+  - --env=PATH=/app/bin:/usr/bin:/app/lib/git-core
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
