@@ -19,14 +19,13 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
-  - --device=dri
+  - --device=all
   - --share=network
   - --socket=pulseaudio
   - --talk-name=ca.desrt.dconf
@@ -37,7 +36,6 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
 rename-icon: vmpk
 rename-desktop-file: vmpk.desktop
 copy-icon: true
