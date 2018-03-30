@@ -31,6 +31,7 @@ finish-args:
   - --device=dri
   - --share=network
   - --socket=pulseaudio
+  - --own-name=org.insilmaril.*
   - --talk-name=ca.desrt.dconf
   - --talk-name=org.freedesktop.FileManager1
   - --talk-name=org.freedesktop.portal.Fcitx
