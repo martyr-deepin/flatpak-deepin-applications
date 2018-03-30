@@ -1,17 +1,17 @@
 ---
-app-id: org.deepin.flatdeb.warzone2100
+app-id: org.deepin.flatdeb.qupzilla
 branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: warzone2100
+command: qupzilla
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
 modules:
-  - name: warzone2100
+  - name: qupzilla
     x-flatdeb-apt-packages:
-      - warzone2100
+      - qupzilla
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -36,12 +36,8 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-cleanup-commands:
-  - mkdir -p /app/bin
-  - mv /app/games/warzone2100 /app/bin/warzone2100.real
-  - echo "#!/bin/sh\n/app/bin/warzone2100.real --datadir=/app/share/games/warzone2100/ \$@\n" | tee /app/bin/warzone2100
-  - chmod +x /app/bin/warzone2100
-rename-icon: warzone2100
-rename-desktop-file: warzone2100.desktop
+
+rename-icon: qupzilla
+rename-desktop-file: qupzilla.desktop
 copy-icon: true
 ...

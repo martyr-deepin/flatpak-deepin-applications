@@ -37,9 +37,9 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 cleanup-commands:
-  - mv /app/bin/scibus-ng /app/bin/scibus-ng.real
-  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/scibus-ng.real \$@\n" | tee /app/bin/scibus-ng
-  - chmod +x /app/bin/scibus-ng
+  - mv /app/bin/scribus-ng /app/bin/scribus-ng.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/scribus-ng.real \$@\n" | tee /app/bin/scribus-ng
+  - chmod +x /app/bin/scribus-ng
 rename-icon: scribus-ng
 rename-desktop-file: scribus-ng.desktop
 copy-icon: true
