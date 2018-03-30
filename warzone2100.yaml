@@ -19,7 +19,6 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
@@ -38,8 +37,9 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 cleanup-commands:
-  - mkdir -p /app/bin
-  - mv /app/games/warzone2100 /app/bin/warzone2100
+  - mv /app/bin/warzone2100 /app/bin/warzone2100.real
+  - echo "#!/bin/sh\n/app/bin/warzone2100.real --datadir=/app/share/games/warzone2100/ \$@\n" | tee /app/bin/warzone2100
+  - chmod +x /app/bin/warzone2100
 rename-icon: warzone2100
 rename-desktop-file: warzone2100.desktop
 copy-icon: true
