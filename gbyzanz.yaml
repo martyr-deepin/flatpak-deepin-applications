@@ -55,7 +55,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/gbyzanz /app/bin/gbyzanz.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/gbyzanz.real \$@\n" | tee /app/bin/gbyzanz
+  - chmod +x /app/bin/gbyzanz
 rename-icon: gbyzanz
 rename-desktop-file: gbyzanz.desktop
 copy-icon: true

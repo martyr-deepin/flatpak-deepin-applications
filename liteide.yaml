@@ -21,7 +21,6 @@ modules:
     post-install:
       - install -Dm644 /app/share/icons/liteide.png /app/share/icons/hicolor/48x48/apps/liteide.png
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
@@ -39,7 +38,6 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
 rename-icon: liteide
 rename-desktop-file: liteide.desktop
 copy-icon: true

@@ -1,0 +1,47 @@
+---
+app-id: org.deepin.flatdeb.mame
+branch: master
+runtime: org.deepin.flatdeb.Base.Platform
+runtime-version: unstable
+sdk: org.deepin.flatdeb.Base.Sdk
+command: mame
+writable-sdk: true
+appstream-compose: false
+separate-locales: false
+modules:
+  - name: mame
+    x-flatdeb-apt-packages:
+      - mame
+    sources:
+      - type: file
+        path: deb-buildapi/configure
+        dest: '.'
+      - type: file
+        path: deb-buildapi/Makefile
+    post-install:
+      - mkdir -p /app/bin
+      - install -Dm755 /app/games/mame /app/bin/mame
+      - sed -i 's|Exec=.*|Exec=mame|g' /app/share/applications/mame.desktop
+finish-args:
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --socket=pulseaudio
+  - --talk-name=ca.desrt.dconf
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
+
+rename-icon: mame
+rename-desktop-file: mame.desktop
+copy-icon: true
+...

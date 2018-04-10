@@ -1,36 +1,49 @@
 ---
 app-id: org.deepin.flatdeb.goldendict
 branch: master
-runtime: org.deepin.flatdeb.kf5.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.kf5.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: goldendict
 writable-sdk: true
 appstream-compose: false
+separate-locales: false
 modules:
   - name: goldendict
     x-flatdeb-apt-packages:
       - goldendict
+      - liblzo2-2
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
-        path: goldendict/Makefile
-
+        path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/goldendict.png /app/share/icons/hicolor/256x256/apps/goldendict.png
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/lib/x86_64-linux-gnu
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
-  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --talk-name=ca.desrt.dconf
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
-  - --talk-name=ca.desrt.dconf
-  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --filesystem=home
+cleanup-commands:
+  - mv /app/bin/goldendict /app/bin/goldendict.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/goldendict.real \$@\n" | tee /app/bin/goldendict
+  - chmod +x /app/bin/goldendict
+rename-icon: goldendict
 rename-desktop-file: goldendict.desktop
-copy-icon: false
+copy-icon: true
 ...

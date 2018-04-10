@@ -1,12 +1,13 @@
 ---
 app-id: org.deepin.flatdeb.gwenview
 branch: master
-runtime: org.deepin.flatdeb.kf5.Platform
+runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.kf5.Sdk
+sdk: org.deepin.flatdeb.Base.Sdk
 command: gwenview
 writable-sdk: true
 appstream-compose: false
+separate-locales: false
 modules:
   - name: gwenview
     x-flatdeb-apt-packages:
@@ -18,13 +19,24 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=QML2_IMPORT_PATH=/app/lib/x86_64-linux-gnu/qt5/qml
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
   - --socket=wayland
   - --device=dri
   - --share=network
   - --socket=pulseaudio
+  - --talk-name=ca.desrt.dconf
+  - --talk-name=org.freedesktop.FileManager1
+  - --talk-name=org.freedesktop.portal.Fcitx
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=com.deepin.filemanager.filedialog
+  - --filesystem=xdg-run/dconf
+  - --filesystem=~/.config/dconf:ro
+  - --filesystem=home
+
 rename-icon: gwenview
 rename-desktop-file: org.kde.gwenview.desktop
 copy-icon: true

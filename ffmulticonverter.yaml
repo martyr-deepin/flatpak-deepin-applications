@@ -21,7 +21,6 @@ modules:
     post-install:
       - install -Dm644 /app/share/pixmaps/ffmulticonverter.png /app/share/icons/hicolor/256x256/apps/ffmulticonverter.png
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -40,7 +39,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/ffmulticonverter /app/bin/ffmulticonverter.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/ffmulticonverter.real \$@\n" | tee /app/bin/ffmulticonverter
+  - chmod +x /app/bin/ffmulticonverter
 rename-icon: ffmulticonverter
 rename-desktop-file: ffmulticonverter.desktop
 copy-icon: true
