@@ -37,7 +37,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: qtcreator
-rename-desktop-file: qtcreator.desktop
+rename-icon: QtProject-qtcreator
+rename-desktop-file: org.qt-project.qtcreator.desktop
 copy-icon: true
 ...

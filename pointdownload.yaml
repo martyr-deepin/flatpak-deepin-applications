@@ -4,7 +4,6 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: pointdownload
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -18,6 +17,9 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/pointdownload.png /app/share/icons/hicolor/64x64/apps/pointdownload.png
+      - sed -i 's|Exec=.*|Exec=/app/opt/Point/PointDownload/PointDownload|g' /app/share/applications/pointdownload.desktop
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt

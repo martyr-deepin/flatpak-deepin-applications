@@ -37,7 +37,6 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: nixnote2
 rename-desktop-file: nixnote2.desktop
 copy-icon: true
 ...

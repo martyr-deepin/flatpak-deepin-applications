@@ -12,6 +12,7 @@ modules:
   - name: octave
     x-flatdeb-apt-packages:
       - octave
+      - libquadmath0
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -19,7 +20,7 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/x86_64-linux-gnu/octave/4.2.1:/app/lib/lapack:/app/lib/libblas:/app/lib/texinfo
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -36,8 +37,12 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - sed -i 's|Exec=.*|Exec=octave|g' /app/share/applications/www.octave.org-octave.desktop
+  - mv /app/bin/octave /app/bin/octave.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/octave.real \$@\n" | tee /app/bin/octave
+  - chmod +x /app/bin/octave
 rename-icon: octave
-rename-desktop-file: octave.desktop
+rename-desktop-file: www.octave.org-octave.desktop
 copy-icon: true
 ...

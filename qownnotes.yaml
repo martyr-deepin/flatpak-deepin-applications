@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: qownnotes
+command: QOwnNotes
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -37,7 +37,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: qownnotes
-rename-desktop-file: qownnotes.desktop
+rename-icon: QOwnNotes
+rename-desktop-file: QOwnNotes.desktop
 copy-icon: true
 ...

@@ -18,6 +18,10 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/opt/teamviewer/tv_bin/desktop/com.teamviewer.TeamViewer-Host.desktop  /app/share/applications/teamviewer-host.desktop
+      - install -Dm644 /app/opt/teamviewer/tv_bin/desktop/teamviewer.png /app/share/icons/hicolor/48x48/apps/teamviewer-host.png
+      - sed -i 's|Exec=.*|Exec=teamviewer-host|g' /app/share/applications/teamviewer-host.desktop
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +40,9 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/opt/teamviewer/tv_bin/script/teamviewer \$@\n" | tee /app/bin/teamviewer-host
+  - chmod +x /app/bin/teamviewer-host
 rename-icon: teamviewer-host
 rename-desktop-file: teamviewer-host.desktop
 copy-icon: true

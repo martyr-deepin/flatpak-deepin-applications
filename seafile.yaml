@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: seafile-applet
+command: seafile
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -19,7 +19,6 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
@@ -37,7 +36,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/seafile-applet /app/bin/seafile.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/seafile.real \$@\n" | tee /app/bin/seafile
+  - chmod +x /app/bin/seafile
 rename-icon: seafile
 rename-desktop-file: seafile.desktop
 copy-icon: true

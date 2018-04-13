@@ -36,7 +36,9 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - sed -i 's|Exec=.*|Exec=/app/share/paraview/bin/paraview|g' /app/share/applications/paraview.desktop
+  - install -Dm644 /app/share/paraview/bin/paraview /app/bin/paraview
 rename-icon: paraview
 rename-desktop-file: paraview.desktop
 copy-icon: true

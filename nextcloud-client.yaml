@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: nextcloud-client
+command: nextcloud
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -19,7 +19,7 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/x86_64-linux-gnu/nextcloud
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -37,7 +37,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: nextcloud-client
-rename-desktop-file: nextcloud-client.desktop
+rename-icon: Nextcloud
+rename-desktop-file: nextcloud.desktop
 copy-icon: true
 ...

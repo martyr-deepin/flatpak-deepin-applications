@@ -12,12 +12,15 @@ modules:
   - name: openscad
     x-flatdeb-apt-packages:
       - openscad
+      - libmpfr4
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/openscad.png /app/share/icons/hicolor/512x512/apps/openscad.png
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +39,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/openscad /app/bin/openscad.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/openscad.real \$@\n" | tee /app/bin/openscad
+  - chmod +x /app/bin/openscad
 rename-icon: openscad
 rename-desktop-file: openscad.desktop
 copy-icon: true

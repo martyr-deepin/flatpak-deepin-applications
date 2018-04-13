@@ -18,10 +18,13 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/persepolis.svg /app/share/icons/hicolor/scalable/apps/persepolis.svg
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --share=ipc
   - --socket=x11
   - --socket=wayland

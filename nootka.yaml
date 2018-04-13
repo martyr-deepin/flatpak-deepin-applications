@@ -18,8 +18,10 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/nootka.png /app/share/icons/hicolor/512x512/apps/nootka.png
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/nootka
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc

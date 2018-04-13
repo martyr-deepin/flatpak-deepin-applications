@@ -18,6 +18,17 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    x-flatdeb-apt-sources:
+      - apt_uri: 'http://pools.corp.deepin.com/deepin'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+          - non-free
+          - contrib
+      - apt_uri: '[trusted=yes] http://10.0.12.149/flatpak-test'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +47,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/sayonara /app/bin/sayonara.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/sayonara.real \$@\n" | tee /app/bin/sayonara
+  - chmod +x /app/bin/sayonara
 rename-icon: sayonara
 rename-desktop-file: sayonara.desktop
 copy-icon: true

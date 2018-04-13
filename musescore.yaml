@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: musescore
+command: mscore
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -37,7 +37,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: musescore
-rename-desktop-file: musescore.desktop
+rename-icon: mscore
+rename-desktop-file: mscore.desktop
 copy-icon: true
 ...

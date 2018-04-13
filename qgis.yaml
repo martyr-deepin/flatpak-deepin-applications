@@ -19,7 +19,7 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/libblas:/app/lib/lapack:/app/lib/qgis/plugins:/app/lib/ogdi
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc

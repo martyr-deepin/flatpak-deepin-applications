@@ -38,6 +38,6 @@ finish-args:
   - --filesystem=home
 
 rename-icon: qbittorrent
-rename-desktop-file: qbittorrent.desktop
+rename-desktop-file: qBittorrent.desktop
 copy-icon: true
 ...

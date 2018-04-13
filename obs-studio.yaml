@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: obs-studio
+command: obs
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -36,8 +36,11 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
-rename-icon: obs-studio
-rename-desktop-file: obs-studio.desktop
+cleanup-commands:
+  - mv /app/bin/obs /app/bin/obs.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/obs.real \$@\n" | tee /app/bin/obs
+  - chmod +x /app/bin/obs
+rename-icon: obs
+rename-desktop-file: obs.desktop
 copy-icon: true
 ...

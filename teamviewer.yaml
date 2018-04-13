@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: teamviewer
+command: teamviewer.real
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -18,6 +18,10 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/opt/teamviewer/tv_bin/desktop/com.teamviewer.TeamViewer.desktop /app/share/applications/com.teamviewer.TeamViewer.desktop
+      - install -Dm644 /app/opt/teamviewer/tv_bin/desktop/teamviewer_48.png /app/share/icons/hicolor/48x48/apps/TeamViewer.png
+      - sed -i 's|Exec=.*|Exec=teamviewer.real|g' /app/share/applications/com.teamviewer.TeamViewer.desktop
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,8 +40,11 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
-rename-icon: teamviewer
-rename-desktop-file: teamviewer.desktop
+cleanup-commands:
+  - mkdir -p /app/bin
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/opt/teamviewer/tv_bin/script/teamviewer \$@\n" | tee /app/bin/teamviewer.real
+  - chmod +x /app/bin/teamviewer.real
+rename-icon: TeamViewer
+rename-desktop-file: com.teamviewer.TeamViewer.desktop
 copy-icon: true
 ...

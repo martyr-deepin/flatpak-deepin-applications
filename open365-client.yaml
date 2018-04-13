@@ -37,7 +37,7 @@ finish-args:
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: open365-client
+rename-icon: open365
 rename-desktop-file: open365-client.desktop
 copy-icon: true
 ...

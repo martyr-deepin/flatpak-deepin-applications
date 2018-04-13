@@ -19,7 +19,6 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
@@ -37,7 +36,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/simplescreenrecorder /app/bin/simplescreenrecorder.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/simplescreenrecorder.real \$@\n" | tee /app/bin/simplescreenrecorder
+  - chmod +x /app/bin/simplescreenrecorder
 rename-icon: simplescreenrecorder
 rename-desktop-file: simplescreenrecorder.desktop
 copy-icon: true

@@ -36,7 +36,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/qupzilla /app/bin/qupzilla.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/qupzilla.real \$@\n" | tee /app/bin/qupzilla
+  - chmod +x /app/bin/qupzilla
 rename-icon: qupzilla
 rename-desktop-file: qupzilla.desktop
 copy-icon: true

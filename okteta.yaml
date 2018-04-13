@@ -38,6 +38,6 @@ finish-args:
   - --filesystem=home
 
 rename-icon: okteta
-rename-desktop-file: okteta.desktop
+rename-desktop-file: org.kde.okteta.desktop
 copy-icon: true
 ...

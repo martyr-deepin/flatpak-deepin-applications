@@ -12,6 +12,15 @@ modules:
   - name: yarock
     x-flatdeb-apt-packages:
       - yarock
+      - vlc
+      - gstreamer1.0-plugins-base-apps
+      - gstreamer1.0-pulseaudio
+      - libqt5multimedia5-plugins
+      - gstreamer1.0-plugins-base
+      - gstreamer1.0-plugins-good
+      - gstreamer1.0-plugins-bad
+      - gstreamer1.0-plugins-ugly
+
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -19,7 +28,6 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
@@ -37,7 +45,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/yarock /app/bin/yarock.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/yarock.real \$@\n" | tee /app/bin/yarock
+  - chmod +x /app/bin/yarock
 rename-icon: application-x-yarock
 rename-desktop-file: yarock.desktop
 copy-icon: true
