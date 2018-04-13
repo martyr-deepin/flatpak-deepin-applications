@@ -19,8 +19,9 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
     post-install:
-      - mkdir -p /app/bin
-      - cp /app/lib/hedgewars/bin/* /app/bin/
+      - rm -f /app/bin/hedgewars
+      - echo "#!/bin/sh\n/app/lib/hedgewars/bin/hedgewars --data-dir=/app/share/games/hedgewars \$@\n" | tee /app/bin/hedgewars
+      - chmod +x /app/bin/hedgewars
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/hedgewars/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt

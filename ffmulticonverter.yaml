@@ -43,6 +43,7 @@ cleanup-commands:
   - mv /app/bin/ffmulticonverter /app/bin/ffmulticonverter.real
   - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/ffmulticonverter.real \$@\n" | tee /app/bin/ffmulticonverter
   - chmod +x /app/bin/ffmulticonverter
+  - ln -sf /app/bin/convert-im6.q16 /app/bin/convert
 rename-icon: ffmulticonverter
 rename-desktop-file: ffmulticonverter.desktop
 copy-icon: true
