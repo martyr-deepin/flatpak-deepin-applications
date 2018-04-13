@@ -25,7 +25,7 @@ finish-args:
   - --share=ipc
   - --socket=x11
   - --socket=wayland
-  - --device=dri
+  - --device=all
   - --share=network
   - --socket=pulseaudio
   - --talk-name=ca.desrt.dconf
