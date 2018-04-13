@@ -26,6 +26,7 @@ finish-args:
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --env=LC_ALL=C.UTF-8
   - --share=ipc
   - --socket=x11
   - --socket=wayland
