@@ -11,6 +11,16 @@ modules:
   - name: pointdownload
     x-flatdeb-apt-packages:
       - pointdownload
+      - libappindicator1
+      - qml-module-qtquick-controls
+      - qml-module-qtquick-layouts
+      - qml-module-qtquick-dialogs
+      - qml-module-qtquick-extras
+      - qml-module-qtquick-localstorage
+      - qml-module-qtquick-privatewidgets
+      - qml-module-qtquick-window2
+      - qml-module-qtquick-xmllistmodel
+      - qml-module-qt-labs-folderlistmodel
     sources:
       - type: file
         path: deb-buildapi/configure

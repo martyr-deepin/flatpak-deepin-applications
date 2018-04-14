@@ -21,6 +21,7 @@ modules:
         path: deb-buildapi/Makefile
     post-install:
       - install -Dm644 /app/share/pixmaps/openscad.png /app/share/icons/hicolor/512x512/apps/openscad.png
+      - install -Dm644 /lib/x86_64-linux-gnu/libmpfr.so.4.1.5 /app/lib/x86_64-linux-gnu/libmpfr.so.4
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt

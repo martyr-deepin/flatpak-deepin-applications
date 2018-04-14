@@ -4,7 +4,7 @@ branch: master
 runtime: org.deepin.flatdeb.Base.Platform
 runtime-version: unstable
 sdk: org.deepin.flatdeb.Base.Sdk
-command: wiznote
+command: WizNote
 writable-sdk: true
 appstream-compose: false
 separate-locales: false

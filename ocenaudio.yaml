@@ -18,6 +18,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - sed -i 's|Exec=.*|Exec=ocenaudio|g' /app/share/applications/ocenaudio.desktop
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +38,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/ocenaudio /app/bin/ocenaudio.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/opt/ocenaudio/bin/ocenaudio \$@\n" | tee /app/bin/ocenaudio
+  - chmod +x /app/bin/ocenaudio
 rename-icon: ocenaudio
 rename-desktop-file: ocenaudio.desktop
 copy-icon: true

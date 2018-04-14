@@ -12,12 +12,19 @@ modules:
   - name: vlc
     x-flatdeb-apt-packages:
       - vlc
+      - vlc-l10n
+      - vlc-plugin-skins2
+      - vlc-plugin-notify
+      - vlc-plugin-samba
+      - vlc-plugin-video-splitter
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - sed -i 's|Exec=.*|Exec=vlc|g' /app/share/applications/vlc.desktop
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +43,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/vlc /app/bin/vlc.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/vlc.real \$@\n" | tee /app/bin/vlc
+  - chmod +x /app/bin/vlc
 rename-icon: vlc
 rename-desktop-file: vlc.desktop
 copy-icon: true

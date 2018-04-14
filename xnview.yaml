@@ -19,7 +19,8 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/opt/XnView/lib
+  - --env=QT_PLUGIN_PATH=/app/opt/XnView/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
@@ -36,8 +37,11 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/xnview /app/bin/xnview.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/opt/XnView/XnView \$@\n" | tee /app/bin/xnview
+  - chmod +x /app/bin/xnview
 rename-icon: xnview
-rename-desktop-file: xnview.desktop
+rename-desktop-file: XnView.desktop
 copy-icon: true
 ...

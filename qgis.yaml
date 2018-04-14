@@ -18,6 +18,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /lib/x86_64-linux-gnu/libquadmath.so.0.0.0 /app/lib/x86_64-linux-gnu/libquadmath.so.0
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/libblas:/app/lib/lapack:/app/lib/qgis/plugins:/app/lib/ogdi
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt

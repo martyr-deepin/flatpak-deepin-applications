@@ -18,6 +18,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /lib/x86_64-linux-gnu/libmagic.so.1.0.0 /app/lib/x86_64-linux-gnu/libmagic.so.1
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +38,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/lyx /app/bin/lyx.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/lyx.real \$@\n" | tee /app/bin/lyx
+  - chmod +x /app/bin/lyx
 rename-icon: lyx
 rename-desktop-file: lyx.desktop
 copy-icon: true
