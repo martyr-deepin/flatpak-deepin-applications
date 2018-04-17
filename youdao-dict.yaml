@@ -34,7 +34,7 @@ finish-args:
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
-  - --talk-name=com.youdao.*
+  - --own-name=com.youdao.*
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
