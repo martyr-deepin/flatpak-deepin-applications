@@ -19,6 +19,8 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
     post-install:
+      - echo "#!/bin/sh\nGUILE_LOAD_PATH=/app/share/guile/1.8 TEXMACS_PATH=/app/share/TeXmacs/ TEXMACS_BIN_PATH=/app/lib/TeXmacs/bin /app/lib/TeXmacs/bin/texmacs.bin $@\n" | tee /app/bin/texmacs
+      - chmod +x /app/bin/texmacs
       - install -Dm644 /app/share/icons/gnome/scalable/apps/TeXmacs.svg /app/share/icons/hicolor/scalable/apps/texmacs.svg
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
