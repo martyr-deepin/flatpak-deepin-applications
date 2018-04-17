@@ -36,6 +36,7 @@ cleanup-commands:
   - rm -f /app/bin/brackets
   - echo "!/bin/sh\n/app/brackets/Brackets --no-sandbox" > /app/bin/brackets
   - chmod +x /app/bin/brackets
+  - dpkg --purge --force-remove-essential --force-depends xdg-utils
 finish-args:
   - --share=ipc
   - --socket=x11
