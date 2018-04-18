@@ -19,6 +19,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /usr/lib/x86_64-linux-gnu/libarchive.so.13 /app/lib/x86_64-linux-gnu/libarchive.so.13
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/lib/x86_64-linux-gnu/kadu:/app/lib/x86_64-linux-gnu/enchant:/app/lib/x86_64-linux-gnu/qca-qt5/crypto
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt

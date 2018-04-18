@@ -18,6 +18,10 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm644 /app/share/pixmaps/kuaipan4uk.png /app/share/icons/hicolor/48x48/apps/kuaipan4uk.png
+      - install -Dm644 /app/opt/ubuntukylin/kuaipan4uk/lib/libxlive.so.1.0.0 /app/lib/x86_64-linux-gnu/libxlive.so
+      - sed -i 's|Exec=.*|Exec=kuaipan4uk|g' /app/share/applications/kuaipan4uk.desktop
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -36,7 +40,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - mv /app/bin/kuaipan4uk /app/bin/kuaipan4uk.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/opt/ubuntukylin/kuaipan4uk/bin/kuaipan4uk \$@\n" | tee /app/bin/kuaipan4uk
+  - chmod +x /app/bin/kuaipan4uk
 rename-icon: kuaipan4uk
 rename-desktop-file: kuaipan4uk.desktop
 copy-icon: true

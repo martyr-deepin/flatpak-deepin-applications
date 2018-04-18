@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.konsole
 branch: master
-runtime: org.deepin.flatdeb.Base.Platform
+runtime: org.deepin.flatdeb.kf5.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.Base.Sdk
+sdk: org.deepin.flatdeb.kf5.Sdk
 command: konsole
 writable-sdk: true
 appstream-compose: false

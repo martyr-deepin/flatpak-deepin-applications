@@ -1,10 +1,10 @@
 ---
 app-id: org.deepin.flatdeb.kolourpaint4
 branch: master
-runtime: org.deepin.flatdeb.Base.Platform
+runtime: org.deepin.flatdeb.kf5.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.Base.Sdk
-command: kolourpaint4
+sdk: org.deepin.flatdeb.kf5.Sdk
+command: kolourpaint
 writable-sdk: true
 appstream-compose: false
 separate-locales: false
@@ -33,11 +33,15 @@ finish-args:
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
+  - --own-name=org.kde.*
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
-rename-icon: kolourpaint4
-rename-desktop-file: kolourpaint4.desktop
+cleanup-commands:
+  - mv /app/bin/kolourpaint /app/bin/kolourpaint.real
+  - echo "#!/bin/sh\nLD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so /app/bin/kolourpaint.real \$@\n" | tee /app/bin/kolourpaint
+  - chmod +x /app/bin/kolourpaint
+rename-icon: kolourpaint
+rename-desktop-file: org.kde.kolourpaint.desktop
 copy-icon: true
 ...

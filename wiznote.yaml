@@ -12,16 +12,34 @@ modules:
   - name: wiznote
     x-flatdeb-apt-packages:
       - wiznote
+      - libssl1.0.2
+      - libssl1.1
     sources:
       - type: file
         path: deb-buildapi/configure
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    x-flatdeb-apt-sources:
+      - apt_uri: 'http://pools.corp.deepin.com/deepin'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+          - non-free
+          - contrib
+      - apt_uri: '[trusted=yes] http://10.0.12.149/flatpak-test'
+        apt_suite: 'unstable'
+        apt_components:
+          - main
+    post-install:
+      - install -Dm644 /usr/lib/x86_64-linux-gnu/libssl.so.1.0.2 /app/lib/x86_64-linux-gnu/libssl.so.1.0.2
+      - install -Dm644 /usr/lib/x86_64-linux-gnu/libcrypto.so.1.0.2 /app/lib/x86_64-linux-gnu/libcrypto.so.1.0.2
+      - install -Dm644 /app/share/wiznote/5.9/gcc_64/libexec/QtWebEngineProcess /app/lib/x86_64-linux-gnu/QtWebEngineProcess
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/share/wiznote/5.9/gcc_64/lib:/app/share/wiznote/5.9/gcc_64/libexec
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
+  - --env=QT_PLUGIN_PATH=/app/share/wiznote/5.9/gcc_64/plugins
   - --share=ipc
   - --socket=x11
   - --socket=wayland

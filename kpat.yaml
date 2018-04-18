@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.kpat
 branch: master
-runtime: org.deepin.flatdeb.Base.Platform
+runtime: org.deepin.flatdeb.kf5.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.Base.Sdk
+sdk: org.deepin.flatdeb.kf5.Sdk
 command: kpat
 writable-sdk: true
 appstream-compose: false
@@ -18,6 +18,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm755 /app/games/kpat /app/bin/kpat
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -33,11 +35,12 @@ finish-args:
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
+  - --own-name=org.kde.*
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
 rename-icon: kpat
-rename-desktop-file: kpat.desktop
+rename-desktop-file: org.kde.kpat.desktop
 copy-icon: true
 ...

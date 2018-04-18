@@ -25,6 +25,7 @@ modules:
       - mv /app/bin/fritzing /app/bin/fritzing.real
       - echo "#!/bin/sh\n\ncd /app/share/fritzing/parts\n/app/bin/fritzing.real $@\n" | tee /app/bin/fritzing
       - chmod +x /app/bin/fritzing
+      - sed -i 's|Exec=.*|Exec=fritzing|g' /app/share/applications/fritzing.desktop
 finish-args:
   - --env=LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libsnappypreload.so
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib

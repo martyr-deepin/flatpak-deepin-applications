@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.kate
 branch: master
-runtime: org.deepin.flatdeb.Base.Platform
+runtime: org.deepin.flatdeb.kf5.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.Base.Sdk
+sdk: org.deepin.flatdeb.kf5.Sdk
 command: kate
 writable-sdk: true
 appstream-compose: false
@@ -12,7 +12,6 @@ modules:
   - name: kate
     x-flatdeb-apt-packages:
       - kate
-      - kate5-data
     sources:
       - type: file
         path: deb-buildapi/configure
@@ -39,6 +38,6 @@ finish-args:
   - --filesystem=home
 
 rename-icon: kate
-rename-desktop-file: org.kde.kate.desktop
+rename-desktop-file: kate.desktop
 copy-icon: true
 ...

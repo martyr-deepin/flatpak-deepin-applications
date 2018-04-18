@@ -19,8 +19,9 @@ modules:
       - type: file
         path: deb-buildapi/Makefile
 finish-args:
-  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
+  - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib:/app/share/qcad:/app/share/qcad/plugins
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+  - --env=QT_PLUGIN_PATH=/app/share/qcad/plugins
   - --env=DCONF_USER_CONFIG_DIR=.config/dconf
   - --share=ipc
   - --socket=x11
@@ -36,7 +37,10 @@ finish-args:
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
-
+cleanup-commands:
+  - echo "#!/bin/sh\n/app/share/qcad/qcad-bin \$@\n" | tee /app/bin/qcad
+  - chmod +x /app/bin/qcad
+  - sed -i 's|Exec=.*|Exec=qcad|g' /app/share/applications/qcad.desktop
 rename-icon: qcad
 rename-desktop-file: qcad.desktop
 copy-icon: true

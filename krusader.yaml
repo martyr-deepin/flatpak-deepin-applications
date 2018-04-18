@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.krusader
 branch: master
-runtime: org.deepin.flatdeb.Base.Platform
+runtime: org.deepin.flatdeb.kf5.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.Base.Sdk
+sdk: org.deepin.flatdeb.kf5.Sdk
 command: krusader
 writable-sdk: true
 appstream-compose: false
@@ -33,11 +33,12 @@ finish-args:
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
+  - --own-name=org.kde.*
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
-rename-icon: krusader
-rename-desktop-file: krusader.desktop
+rename-icon: krusader_user
+rename-desktop-file: org.kde.krusader.desktop
 copy-icon: true
 ...

@@ -1,9 +1,9 @@
 ---
 app-id: org.deepin.flatdeb.kmahjongg
 branch: master
-runtime: org.deepin.flatdeb.Base.Platform
+runtime: org.deepin.flatdeb.kf5.Platform
 runtime-version: unstable
-sdk: org.deepin.flatdeb.Base.Sdk
+sdk: org.deepin.flatdeb.kf5.Sdk
 command: kmahjongg
 writable-sdk: true
 appstream-compose: false
@@ -18,6 +18,8 @@ modules:
         dest: '.'
       - type: file
         path: deb-buildapi/Makefile
+    post-install:
+      - install -Dm755 /app/games/kmahjongg /app/bin/kmahjongg
 finish-args:
   - --env=LD_LIBRARY_PATH=/app/lib/x86_64-linux-gnu:/app/lib
   - --env=SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
@@ -33,11 +35,12 @@ finish-args:
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
+  - --own-name=org.kde.*
   - --filesystem=xdg-run/dconf
   - --filesystem=~/.config/dconf:ro
   - --filesystem=home
 
 rename-icon: kmahjongg
-rename-desktop-file: kmahjongg.desktop
+rename-desktop-file: org.kde.kmahjongg.desktop
 copy-icon: true
 ...
