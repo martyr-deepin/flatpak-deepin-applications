@@ -36,7 +36,7 @@ finish-args:
   - --talk-name=com.deepin.filemanager.filedialog
   - --own-name=com.deepin.SingleInstance.deepin-image-viewer
   - --talk-name=com.deepin.daemon.Appearance
-  - filesystem=/media
+  - --filesystem=/media
 rename-icon: deepin-image-viewer
 rename-desktop-file: deepin-image-viewer.desktop
 copy-icon: true
