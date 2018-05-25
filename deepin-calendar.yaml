@@ -28,7 +28,7 @@ finish-args:
   - --socket=pulseaudio
   - --talk-name=com.deepin.api.LunarCalendar
   - --own-name=com.deepin.Calendar
-  - --own-name=com.deepin.SingleInstance.dde-calendar
+  - --own-name=com.deepin.SingleInstance.*
   - --talk-name=com.deepin.Manual.*
   - --talk-name=com.deepin.dman
   - --talk-name=org.freedesktop.FileManager1
