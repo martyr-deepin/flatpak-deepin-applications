@@ -33,6 +33,7 @@ finish-args:
   - --talk-name=org.freedesktop.portal.Fcitx
   - --talk-name=org.freedesktop.Notifications
   - --talk-name=com.deepin.filemanager.filedialog
+  - --talk-name=com.deepin.daemon.Zone
 rename-icon: deepin-screenshot
 rename-desktop-file: deepin-screenshot.desktop
 copy-icon: true
